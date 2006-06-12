@@ -1,0 +1,24 @@
+RHDL - Ruby Hardware Description Language
+
+RHDL looks similar to VHDL - there are processes which can have sensitivity 
+lists, and signals.
+
+In the examples subdirectory you'll find a couple of examples with
+RUNIT testcases.
+
+The example in testsimple.rb file defines a counter which increments on 
+the rising edge of clk.  It also has a synchronous reset so that if the 
+rst signal is high on the rising edge of clk, counter gets reset to 0.
+
+To run the testsimple example:
+
+> ruby testsimple.rb
+
+
+The input vectors and expected output for this testcase are contained
+in the file 'simple_data'.
+
+If you have questions you can send them to me at:
+rubyfan@programmer.net
+
+Phil

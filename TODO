@@ -1,0 +1,20 @@
+# 'title' = 'RHDL'
+# 'subtitle' = 'TODO list'
+# 'keywords' = 'Keywords used by search engines.'
+# 'description' = 'Basic desc for search engines.'
+
+** TODO prior to 0.5.0:
+
++ add more test cases
++ add info to the UsersGuide and add a RHDL Class reference document
++ add LXT output for use with GtkWave (waveform viewer)
+
+
+** TODO longterm:
+
++ Improve performance: Yeah, it's slow (and it gets slower as you add more signals and designs).  I'm thinking that parts of RHDL could be rewritten in C to significantly improve performance, but first I want to build up more testcases to ensure that nothing breaks.
++ Improve the simulation interface: maybe add arguments to step or perhaps add iterators to TestBenches.
++ Add more high-level features: Protocols
++ Distributed simulation? (using Drb and/or TaskMaster)
++ An interface to Icarus Verilog?
++ conversion of RHDL designs to VHDL/Verilog

@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>~/development/RHDL_new/examples/testTB.rb.html</title>
+<meta name="Generator" content="Vim/6.1">
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<pre>
+<font color="#0000f8">###########################################################################</font>
+<font color="#0000f8"># TestTb.rb - test TestBench and hierarchy and structural style</font>
+<font color="#0000f8">###########################################################################</font>
+<font color="#a020f0">require</font> <font color="#6858c8">'</font><font color="#f800f8">RHDL</font><font color="#6858c8">'</font>
+
+<font color="#0000f8">################################################</font>
+<font color="#0000f8"># not gate</font>
+<font color="#0000f8">################################################</font>
+<font color="#a020f0">class </font><font color="#288850"><b>My_Not </b></font>&lt; <font color="#6858c8">RHDL</font>::<font color="#6858c8">Design</font>
+<font color="#a020f0">  include</font> <font color="#6858c8">RHDL</font>
+<font color="#a020f0">  def </font><font color="#008888">initialize</font>(a,not_a)
+    inputs  = { <font color="#6858c8">'</font><font color="#f800f8">A</font><font color="#6858c8">'</font>     =&gt; <font color="#6858c8">Port</font>(a) }
+    outputs = { <font color="#6858c8">'</font><font color="#f800f8">NOT_A</font><font color="#6858c8">'</font> =&gt; <font color="#6858c8">Port</font>(not_a) }
+    super(inputs,outputs)
+    define_behavior {
+      not_a.&lt;&lt; { a.inv  }
+    }
+  <font color="#a020f0">end</font>
+<font color="#a020f0">end</font>
+
+<font color="#0000f8">################################################</font>
+<font color="#0000f8"># Or gate</font>
+<font color="#0000f8">################################################</font>
+<font color="#a020f0">class </font><font color="#288850"><b>My_Or </b></font>&lt; <font color="#6858c8">RHDL</font>::<font color="#6858c8">Design</font>
+<font color="#a020f0">  include</font> <font color="#6858c8">RHDL</font>
+<font color="#a020f0">  def </font><font color="#008888">initialize</font>(a,b,a_and_b)
+    inputs  = { <font color="#6858c8">'</font><font color="#f800f8">A</font><font color="#6858c8">'</font> =&gt; <font color="#6858c8">Port</font>(a),
+                <font color="#6858c8">'</font><font color="#f800f8">B</font><font color="#6858c8">'</font> =&gt; <font color="#6858c8">Port</font>(b)
+              }
+    outputs = {
+               <font color="#6858c8">'</font><font color="#f800f8">A_AND_B</font><font color="#6858c8">'</font> =&gt; <font color="#6858c8">Port</font>(a_and_b)
+              }
+    super(inputs,outputs)
+    define_behavior {
+      a_and_b.&lt;&lt; { a | b }
+    }
+  <font color="#a020f0">end</font>
+<font color="#a020f0">end</font>
+
+<font color="#0000f8">##############################################################################</font>
+<font color="#0000f8"># My_And is an 'and' gate made in a structural style with an OR gate and three</font>
+<font color="#0000f8"># NOT gates (to test hierarchy and structural design in RHDL)</font>
+<font color="#0000f8">##############################################################################</font>
+<font color="#a020f0">class </font><font color="#288850"><b>My_And </b></font>&lt; <font color="#6858c8">RHDL</font>::<font color="#6858c8">Design</font>
+<font color="#a020f0">  include</font> <font color="#6858c8">RHDL</font>
+<font color="#a020f0">  def </font><font color="#008888">initialize</font>(a,b,a_and_b)
+    inputs  = { <font color="#6858c8">'</font><font color="#f800f8">A</font><font color="#6858c8">'</font> =&gt; <font color="#6858c8">Port</font>(a),
+                <font color="#6858c8">'</font><font color="#f800f8">B</font><font color="#6858c8">'</font> =&gt; <font color="#6858c8">Port</font>(b)
+              }
+    outputs = {
+                <font color="#6858c8">'</font><font color="#f800f8">A_AND_B</font><font color="#6858c8">'</font> =&gt; <font color="#6858c8">Port</font>(a_and_b)
+              }
+    super(inputs,outputs)
+    a_not = <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>())
+    b_not = <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>())
+    a_not_OR_b_not = <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>())
+    notGateA = <font color="#6858c8">My_Not</font>.new(a,a_not)
+    notGateB = <font color="#6858c8">My_Not</font>.new(b,b_not)
+    orGate = <font color="#6858c8">My_Or</font>.new(a_not,b_not,a_not_OR_b_not)
+    notGateOut = <font color="#6858c8">My_Not</font>.new(a_not_OR_b_not,a_and_b)
+  <font color="#a020f0">end</font>
+<font color="#a020f0">end</font>
+
+
+<font color="#a020f0">class </font><font color="#288850"><b>My_Counter </b></font>&lt; <font color="#6858c8">RHDL</font>::<font color="#6858c8">Design</font>
+<font color="#a020f0">  include</font> <font color="#6858c8">RHDL</font> <font color="#0000f8">#mixin RHDL methods</font>
+<font color="#a020f0">  def </font><font color="#008888">initialize</font>(rst,clk,counter)
+    inputs  = { <font color="#6858c8">'</font><font color="#f800f8">RST</font><font color="#6858c8">'</font> =&gt; <font color="#6858c8">Port</font>(rst),
+                <font color="#6858c8">'</font><font color="#f800f8">CLK</font><font color="#6858c8">'</font> =&gt; <font color="#6858c8">Port</font>(clk)}
+    outputs = {
+                <font color="#6858c8">'</font><font color="#f800f8">COUNTER</font><font color="#6858c8">'</font> =&gt; <font color="#6858c8">Port</font>(counter)
+              }
+    super(inputs,outputs)
+
+    clk_events = <font color="#f800f8">0</font> <font color="#0000f8">#an integer variable</font>
+    define_behavior {
+          process(counter){
+            puts <font color="#6858c8">&quot;</font><font color="#f800f8">--&gt;Start of First Process</font><font color="#6858c8">&quot;</font>
+            wait { clk_events == <font color="#f800f8">3</font> }
+            puts <font color="#6858c8">&quot;</font><font color="#f800f8">counter = </font><font color="#6858c8">#{counter}</font><font color="#6858c8">&quot;</font>
+            puts <font color="#6858c8">&quot;</font><font color="#f800f8">&lt;--End of First Process</font><font color="#6858c8">&quot;</font>
+          }
+          process(clk) {
+            puts <font color="#6858c8">&quot;</font><font color="#f800f8">---&gt;Start of Second Process</font><font color="#6858c8">&quot;</font>
+            <font color="#0000f8">#synchronous reset</font>
+<font color="#a02828"><b>            if</b></font> clk == <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font> &amp;&amp; clk.event
+<font color="#a02828"><b>              if</b></font> rst == <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
+                counter.assign <font color="#f800f8">0</font>
+              <font color="#a02828"><b>else</b></font>
+                counter.assign (counter + <font color="#f800f8">1</font>)
+              <font color="#a02828"><b>end</b></font>
+              clk_events += <font color="#f800f8">1</font>
+            <font color="#a02828"><b>end</b></font>
+            puts <font color="#6858c8">&quot;</font><font color="#f800f8">clk_events = </font><font color="#6858c8">#{clk_events}</font><font color="#6858c8">&quot;</font>
+            puts <font color="#6858c8">&quot;</font><font color="#f800f8">&lt;---End of Second Process</font><font color="#6858c8">&quot;</font>
+          }
+    }
+  <font color="#a020f0">end</font>
+<font color="#a020f0">end</font>
+
+</pre>
+</body>
+</html>

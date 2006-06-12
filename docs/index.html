@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>RHDL: An Agile HDL</TITLE>
+<META NAME="rating" CONTENT="general">
+<META NAME="GENERATOR" CONTENT="ZenWeb v. 2.15.0 http://www.zenspider.com/ZSS/Products/ZenWeb/">
+<META NAME="keywords" CONTENT="HDL, RHDL, Ruby, Verilog, VHDL">
+<META NAME="description" CONTENT="Basic desc for search engines.">
+</HEAD>
+<BODY>
+<P>
+<A HREF="./SiteMap.html"><STRONG>Sitemap</STRONG></A> || RHDL</P>
+<H1>RHDL</H1>
+<H2>An Agile HDL</H2>
+<HR SIZE="3" NOSHADE>
+
+<H2><A NAME="0">Contents:</A></H2>
+
+<UL>
+  <LI><A HREF="#0">Contents</A></LI>
+  <LI><A HREF="#1">What is RHDL?</A></LI>
+  <LI><A HREF="#2">Why? </A></LI>
+  <LI><A HREF="#3">What's it good for?</A></LI>
+  <LI><A HREF="#4">How to get it</A></LI>
+</UL>
+<H2><A NAME="1">What is RHDL?</A></H2>
+
+<P>RHDL (Ruby Hardware Description Language) is an HDL based on the Ruby 
+programming language.  My idea in developing RHDL was to build an HDL
+on an object oriented programming language to allow HDL features (
+concurrent processes, signals, parallelism etc.) in addition to features
+which come with a modern, object oriented, agile programming language like
+Ruby (<A HREF="http://www.ruby-lang.org).">www.ruby-lang.org).</A>  The intent is to allow more than just 
+simulation, but also verification and testbench creation features.  
+Ultimately, I would like to be able to translate RHDL to VHDL and/or Verilog.
+The fact that RHDL is based on Ruby should allow modeling at a higher level of
+abstraction than is possible with VHDL or Verilog.</P>
+
+<P>RHDL users don't need to know much Ruby - this is intentional, I didn't want
+potential users to have to know Ruby in order to benefit from RHDL.  However,
+RHDL becomes a more powerful tool if the user takes a little time to learn
+some Ruby (an excellent tutorial and reference book on Ruby is: "Programming
+Ruby: The Pragmatic Programmer's Guide" by Thomas and Hunt.)</P>
+
+<P>RHDL is not stricly speaking a new language.  It is a set of modules (code
+libraries) that allow Ruby to look like an HDL.  Ruby has a concept called
+code blocks; these blocks are made into lexically scoped closures in order
+to define a domain specific language like RHDL without having to write a 
+seperate parser.</P>
+
+<H2><A NAME="2">Why? </A></H2>
+
+<P>Good question.  Initially I created RHDL as a proof of concept and to demonstrate the power of Ruby for creating domain specific languages. </P>
+
+<P>Scripting languages like Ruby (I prefer to call them agile programming languages since they are full-featured, dynamic programming languages) allow developers to develop at a higher level than is possible with statically typed languages like C, C++ or Java.  This leads to greater productivity.  I suspect that bringing some of these cocepts into the HDL world can also lead to greater productivity over the current crop of HDLs. </P>
+
+<H2><A NAME="3">What's it good for?</A></H2>
+
+<UL>
+  <LI>Teaching HDL concepts including internal simulation concepts (the full source code is available and it is relatively small)</LI>
+  <LI>As a high-level verification language (HVL) (with a few more additions)</LI>
+</UL>
+<H2><A NAME="4">How to get it</A></H2>
+
+<UL>
+  <LI>download <A HREF="http://www.aracnet.com/~ptkwt/ruby_stuff/RHDL/RHDL.tar">RHDL</A> </LI>
+  <LI>Take a look at the <A HREF="QuickStart.html">QuickStart</A> page to get started</LI>
+  <LI>There's also a <A HREF="UsersGuide.html">UsersGuide</A> (it's a work in progress)</LI>
+</UL>
+<H2>Subpages:</H2>
+
+<UL>
+  <LI><A HREF="./SiteMap.html">RHDL: SiteMap</A></LI>
+  <LI><A HREF="./QuickStart.html">RHDL Installation Quickstart: Quick guide to setting up RHDL</A></LI>
+  <LI><A HREF="./UsersGuide.html">RHDL: UsersGuide</A></LI>
+  <LI><A HREF="./RHDL_Examples.html">RHDL: Examples</A></LI>
+  <LI><A HREF="./TODO.html">RHDL: TODO list</A></LI>
+</UL>
+<HR SIZE="3" NOSHADE>
+
+<P>
+<A HREF="./SiteMap.html"><STRONG>Sitemap</STRONG></A> || RHDL</P>
+
+</BODY>
+</HTML>

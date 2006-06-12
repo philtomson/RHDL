@@ -1,0 +1,28 @@
+#            A C
+#          A _ O 
+#        N _ A U
+#        O O N N
+#    R C T R D T
+#    S L _ _ _ E
+#A B T K:A B B R
+#_____________
+ 0 0 0 0:1 0 0 0
+ 0 1 0 0:1 1 0 0
+ 1 0 0 1:0 1 0 1
+ 1 1 0 1:0 1 1 1
+ X 0 0 0:X X X 1
+ X X 0 0:X X X 1
+ X 1 0 0:X X X 1
+ 0 X 0 1:1 X X 2
+ 1 X 0 1:0 X X 2
+ Z 0 0 0:X X X 2
+ Z 1 0 1:X X X 3
+ 0 Z 0 1:1 X X 3
+ 1 Z 0 0:0 X X 3
+ Z Z 0 0:X X X 3
+ X X 0 1:X X X 4
+ X X 1 1:X X X 0
+ X X 1 0:X X X 0
+ X X 0 0:X X X 0
+ X X 0 1:X X X 1
+ X X 0 1:X X X 1

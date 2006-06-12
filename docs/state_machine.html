@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>~/development/RHDL_new/examples/state_machine.rb.html</title>
+<meta name="Generator" content="Vim/6.1">
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<pre>
+<font color="#a020f0">require</font> <font color="#6858c8">'</font><font color="#f800f8">RHDL</font><font color="#6858c8">'</font>
+
+<font color="#a020f0">class </font><font color="#288850"><b>WashMachine </b></font>&lt; <font color="#6858c8">RHDL</font>::<font color="#6858c8">Design</font>
+<font color="#a020f0">  include</font> <font color="#6858c8">RHDL</font>
+<font color="#a020f0">  def </font><font color="#008888">initialize</font>(clk,rst)
+    super()
+    state_sig = <font color="#6858c8">Signal</font>(<font color="#6858c8">StateType</font>(:start,:wash,:rinse,:spin,:stop))
+    define_behavior {
+       process(clk,rst) {
+         <font color="#0000f8">#async reset:</font>
+<font color="#a02828"><b>         if</b></font> rst == <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
+           puts <font color="#6858c8">&quot;</font><font color="#f800f8">RESET</font><font color="#6858c8">&quot;</font>
+           state_sig &lt;&lt;<font color="#6858c8"> :start</font>
+         <font color="#a02828"><b>elsif</b></font> clk.event &amp;&amp; clk == <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
+           <font color="#a02828"><b>case</b></font> state_sig.inspect
+           <font color="#a02828"><b>when</b></font><font color="#6858c8"> :start</font>
+             state_sig &lt;&lt;<font color="#6858c8"> :wash</font>
+           <font color="#a02828"><b>when</b></font><font color="#6858c8"> :wash</font>
+             state_sig &lt;&lt;<font color="#6858c8"> :rinse</font>
+           <font color="#a02828"><b>when</b></font><font color="#6858c8"> :rinse</font>
+             state_sig &lt;&lt;<font color="#6858c8"> :spin</font>
+           <font color="#a02828"><b>when</b></font><font color="#6858c8"> :spin</font>
+             state_sig &lt;&lt;<font color="#6858c8"> :stop</font>
+           <font color="#a02828"><b>when</b></font><font color="#6858c8"> :stop</font>
+             <font color="#0000f8">#stay here till reset</font>
+           <font color="#a02828"><b>else</b></font>
+             <font color="#a02828"><b>raise</b></font> <font color="#6858c8">&quot;</font><font color="#f800f8">invalid state! </font><font color="#6858c8">#{state_sig.state}</font><font color="#6858c8">&quot;</font>
+           <font color="#a02828"><b>end</b></font>
+         <font color="#a02828"><b>end</b></font>
+       }
+       process(state_sig) {
+         <font color="#0000f8">#prints message whenever state_sig changes:</font>
+         puts <font color="#6858c8">&quot;</font><font color="#f800f8">Current state is: </font><font color="#6858c8">#{state_sig}</font><font color="#6858c8">&quot;</font>
+       }
+    }
+  <font color="#a020f0">end</font>
+<font color="#a020f0">end</font>
+
+<font color="#a02828"><b>if</b></font> <font color="#6858c8">$0</font> == __FILE__
+<font color="#a020f0">  include</font> <font color="#6858c8">RHDL</font>
+<font color="#a020f0">  include</font> <font color="#6858c8">TestBench</font>
+
+  clk = <font color="#6858c8">ClkGen</font>.generator(<font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>,<font color="#f800f8">2</font>,<font color="#f800f8">2</font>)
+  rst = <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>.new(<font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>))
+  fsm = <font color="#6858c8">WashMachine</font>.new(clk,rst)
+
+  puts <font color="#6858c8">&quot;</font><font color="#f800f8">step: 0</font><font color="#6858c8">&quot;</font>
+  step
+  puts <font color="#6858c8">&quot;</font><font color="#f800f8">step: 1</font><font color="#6858c8">&quot;</font>
+  step
+  puts <font color="#6858c8">&quot;</font><font color="#f800f8">step: 2</font><font color="#6858c8">&quot;</font>
+  step
+  rst &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>
+  <font color="#f800f8">18</font>.times <font color="#a02828"><b>do</b></font> <font color="#6858c8">|i|</font>
+    puts <font color="#6858c8">&quot;</font><font color="#f800f8">step: </font><font color="#6858c8">#{i+2}</font><font color="#6858c8">&quot;</font>
+    step
+  <font color="#a02828"><b>end</b></font>
+  rst &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
+  <font color="#f800f8">4</font>.times <font color="#a02828"><b>do</b></font> <font color="#6858c8">|i|</font>
+    puts <font color="#6858c8">&quot;</font><font color="#f800f8">step: </font><font color="#6858c8">#{i+2+18}</font><font color="#6858c8">&quot;</font>
+    step
+    rst &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>
+  <font color="#a02828"><b>end</b></font>
+
+<font color="#a02828"><b>end</b></font>
+</pre>
+</body>
+</html>

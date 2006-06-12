@@ -1,0 +1,27 @@
+Changes since 0.4.2:
+
+* fixed problem with ClkGen (wouldn't work with a 1,1 clock)
+* fixed BitVector xor problem
+* Added unit tests for Bit, BitVector, Signal
+* Changed StateType to the more generic EnumType
+* Changed TestBench module name to Simulator (step is in simulator)
+* Changed Simulator::step so that it takes an optional code block
+* Updated docs to reflect changes
+* Updated UsersGuide 
+* fixed some other bugs...
+
+Changes since 0.3.0:
+
+* No new's is good new's:  Used to be you had to do things like:
+    sig = Signal.new(Bit.new('0'))
+  Now, I've added some helper methods so that you can do:
+    sig = Signal(Bit('0'))
+  ... which saves a good bit of typing.
+* The Bit and BitVector classes have pretty much been rewritten and 
+  (hopefully) improved.  I've changed the operators so that they return
+  new objects.  I've also endeavored to make the operators more polymorphic
+  so that you can add an Integer to a BitVector, for example.
+* created a user's guide and much improved the website.
+* added a ClkGen class to make it easier to create clock signals
+* added a StateType class which is kind of like an enumerated state type.
+

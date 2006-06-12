@@ -1,0 +1,432 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE>RHDL: UsersGuide</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1Beta  (Linux)">
+	<META NAME="CREATED" CONTENT="20030401;10072800">
+	<META NAME="CHANGEDBY" CONTENT="Phil Tomson">
+	<META NAME="CHANGED" CONTENT="20030413;1214000">
+	<META NAME="DESCRIPTION" CONTENT="Basic desc for search engines.">
+	<META NAME="KEYWORDS" CONTENT="Keywords used by search engines.">
+	<META NAME="rating" CONTENT="general">
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P><STRONG><A HREF="SiteMap.html">Sitemap</A></STRONG> || <A HREF="index.html">RHDL</A>
+/ RHDL</P>
+<H1>RHDL</H1>
+<H2>UsersGuide</H2>
+<HR SIZE=3 NOSHADE>
+<H2><A NAME="0"></A>Contents:</H2>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><A HREF="#0">Contents</A> 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in"><A HREF="#1">RHDL syntax</A> 
+	</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in"><A HREF="#2">Comments</A> 
+		</P>
+		<LI><P STYLE="margin-bottom: 0in"><A HREF="#3"><B>string literals</B></A>
+				</P>
+	</UL>
+	<LI><P STYLE="margin-bottom: 0in"><A HREF="#4">RHDL Types</A> 
+	</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in"><A HREF="#5">Bit</A> 
+		</P>
+		<UL>
+			<LI><P STYLE="margin-bottom: 0in"><A HREF="#6">Bit Operators:
+			(given a = Bit('1'), b = Bit('0') )</A> 
+			</P>
+		</UL>
+		<LI><P STYLE="margin-bottom: 0in"><A HREF="#7">BitVector</A> 
+		</P>
+		<UL>
+			<LI><P STYLE="margin-bottom: 0in"><A HREF="#8">BitVector Operators</A>
+						</P>
+		</UL>
+		<LI><P STYLE="margin-bottom: 0in"><A HREF="#9">StateType</A> 
+		</P>
+		<LI><P STYLE="margin-bottom: 0in"><A HREF="#10">Other Ruby Types</A>
+				</P>
+	</UL>
+	<LI><P STYLE="margin-bottom: 0in"><A HREF="#11">RHDL elements</A> 
+	</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0in"><A HREF="#12">Signals</A> 
+		</P>
+		<UL>
+			<LI><P STYLE="margin-bottom: 0in"><A HREF="#13">Signal assignment</A>
+						</P>
+			<UL>
+				<LI><P STYLE="margin-bottom: 0in"><A HREF="#14">Examples [given
+				the declaration: bv = Signal(BitVector('1001',4)) ]</A> 
+				</P>
+			</UL>
+			<LI><P STYLE="margin-bottom: 0in"><A HREF="#15">Delayed signal
+			assignment</A> 
+			</P>
+		</UL>
+		<LI><P STYLE="margin-bottom: 0in"><A HREF="#16">Ports</A> 
+		</P>
+		<LI><P STYLE="margin-bottom: 0in"><A HREF="#17">Behavioral elements</A>
+				</P>
+		<UL>
+			<LI><P STYLE="margin-bottom: 0in"><A HREF="#18">define_behavior</A>
+						</P>
+			<LI><P STYLE="margin-bottom: 0in"><A HREF="#19">process</A> 
+			</P>
+			<LI><P><A HREF="#20">wait</A> 
+			</P>
+		</UL>
+	</UL>
+</UL>
+<H2>Introduction:</H2>
+<P>RHDL (Ruby Hardware Description Language) is an HDL based on the
+Ruby programming language. My idea in developing RHDL was to build an
+HDL on an object oriented programming language to allow HDL features
+( concurrent processes, signals, parallelism etc.) in addition to
+features which come with a modern, object oriented, agile programming
+language like Ruby (<A HREF="http://www.ruby-lang.org).">www.ruby-lang.org).</A>
+The intent is to allow more than just simulation, but also
+verification and testbench creation features. Ultimately, I would
+like to be able to translate RHDL to VHDL and/or Verilog. The fact
+that RHDL is based on Ruby allows modeling at a higher level of
+abstraction than is possible with VHDL or Verilog.</P>
+<P>RHDL users don't need to know much Ruby - this is intentional, I
+didn't want potential users to have to know Ruby in order to benefit
+from RHDL. However, RHDL becomes a more powerful tool if the user
+takes a little time to learn some Ruby (an excellent tutorial and
+reference book on Ruby is: &quot;Programming Ruby: The Pragmatic
+Programmer's Guide&quot; by Thomas and Hunt.)</P>
+<P>RHDL is not stricly speaking a new language. It is a set of
+modules (code libraries) that allow Ruby to look like an HDL. Ruby
+has a concept called code blocks; these blocks are made into
+lexically scoped closures in order to define a domain specific
+language like RHDL without having to write a seperate parser.</P>
+<H2><A NAME="1"></A>RHDL syntax</H2>
+<H3><A NAME="2"></A>Comments</H3>
+<P>Comments start with a '#'. The rest of the line following is a
+comment.</P>
+<H3><A NAME="3"></A><B>string literals</B></H3>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">delimited by '' 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">example <B>'100101'</B> 
+	</P>
+	<LI><P>In most cases string literals are automatically converted to
+	Bit or BitVector values when it makes sense (see below). 
+	</P>
+</UL>
+<H2><A NAME="4"></A>RHDL Types</H2>
+<H3><A NAME="5"></A>Bit</H3>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">A Bit type can take on the
+	following values: <B>1,0,X,Z</B> 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">creating a Bit object: <B>b =
+	Bit('0')</B> or <B>b=Bit(0)</B> 
+	</P>
+	<LI><P>NOTE: the Bit constructor can take either a string literal or
+	an integer value of 1 or 0. 
+	</P>
+</UL>
+<H4><A NAME="6"></A>Bit Operators: (given a = Bit('1'), b = Bit('0')
+)</H4>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">OR '+,|': a + b -&gt; 1, a | b -&gt;
+	1 (NOTE: '-&gt;' means 'results in', it is not an operator) 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">AND '*,&amp;': a * b -&gt; 0, a &amp;
+	b -&gt; 0 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">XOR '^': a ^ b -&gt; 1 
+	</P>
+	<LI><P>Inversion '~': ~a -&gt; 0 
+	</P>
+</UL>
+<H3><A NAME="7"></A>BitVector</H3>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">A BitVector is an array of values
+	of type Bit with some extra functionality for math. 
+	</P>
+	<LI><P>creating a BitVector object: <B>bv = BitVector('1001',4)</B>
+	or <B>bv = BitVector(9,4)</B> (the two are equivalent). Note that
+	the second argument to the BitVector constructor indicates the
+	number of bits in the vector. 
+	</P>
+</UL>
+<UL>
+	<LI><H5><A NAME="8"></A>BitVector Operators:</H5>
+</UL>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Logical operators (|,&amp;,^,~) 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Math operators (*(multiplication),
+	/(division), +(addition), -(subtraction)) 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Note: Math operators on BitVectors
+	are (mostly) polymorphic unlike in VHDL. For example, the following
+	are equivilent (given that bv=BitVector('1001',4)): <B>bv=bv+2</B>
+	and <B>bv=bv+'10'</B>. 
+	</P>
+	<LI><P>concatenation: <B>bv3 = bv1.cat bv2</B> 
+	</P>
+</UL>
+<H3><A NAME="9"></A>EnumType</H3>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">An enumerated type for
+	representing a collection of states (for use in creating state
+	machines) 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Example: washStates =
+	EnumType(:start, :wash, :rinse, :spin, :stop) 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">See <A HREF="state_machine.html">state
+	machine example</A> for an example of using EnumType. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">inspect and value methods return
+	current state of washStates. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">first state in enumeration
+	automatically becomes the 'reset' state (ie. in the example above
+	the initial state is :start) 
+	</P>
+	<LI><P>NOTE: the ':' prefixed to a string a characters (as with
+	:start) creates what is known in Ruby as a Symbol - basically it is
+	an immutable string. 
+	</P>
+</UL>
+<H3><A NAME="10"></A>Other Ruby Types</H3>
+<UL>
+	<LI><P>While Bit and BitVector are special to RHDL, users can also
+	use other types native to Ruby: Integer, String (ie. 'This is a
+	string'), Range (ie. 0..5), Symbol (ie. :start) and others (TODO:
+	add more types here). In addition, users can define their own types
+	using Ruby's 'class' definitions. 
+	</P>
+</UL>
+<H2><A NAME="11"></A>RHDL elements</H2>
+<H3><A NAME="12"></A>Signals</H3>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Signals in RHDL are very similar
+	to signals in VHDL. Signals have a history (and more importantly, a
+	future) and can contain values of various types. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Example to create a Signal with a
+	Bit type: <B>s=Signal(Bit('0'))</B> (NOTE: this is roughly
+	equivalent to the VHDL statement: <B>signal s:BIT := '0';</B>) 
+	</P>
+	<LI><P>Example of creating a Signal with a BitVector type:
+	<B>s=Signal(BitVector('1001',4))</B> (NOTE: this is roughly
+	equivalent to the VHDL statement: <B>signal s:BIT_VECTOR(0 to
+	3):='1001'; ) </B>
+	</P>
+</UL>
+<H4><A NAME="13"></A><B>Signal assignment:</B></H4>
+<P STYLE="font-weight: medium">It is essential to understand that '='
+is not to be used for signal assignment. The reason being that Ruby
+uses '=' for assigning object references to variables. Use either
+'assign' or '&lt;&lt;' to assign new values to signals.</P>
+<H5><A NAME="14"></A><B>Examples [given the declaration: bv =
+Signal(BitVector('1001',4)) ]</B></H5>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><B>bv.assign (bv + 1) </B>
+	</P>
+	<LI><P><B>bv &lt;&lt; ( bv + 1 ) </B>(these are equivalent
+	assignments) 
+	</P>
+	<LI><P><B>bv &lt;&lt; '0110'</B> #assign a constant bit string</P>
+</UL>
+<P STYLE="font-weight: medium">     
+</P>
+<H4><A NAME="15"></A><B>Delayed signal assignment</B></H4>
+<P STYLE="font-weight: medium">You can specify that values be
+assigned to signals after a specified amount of ttime by usign the
+assign_at method: 
+</P>
+<PRE STYLE="margin-bottom: 0.2in">    <B>bv.assign_at(5) { bv + 1 }</B></PRE><P STYLE="font-weight: medium">
+<BR>which means that the value bv+1 will be assigned to bv five
+timesteps after the current one.</P>
+<H3><A NAME="16"></A><B>Ports</B></H3>
+<P><B>TODO: define Ports</B></P>
+<P><B>Note:</B> the role of Ports in RHDL is 'evolving'. At this
+point, I don't believe they are necessary except for two uses:</P>
+<UL>
+	<UL>
+		<LI><P STYLE="font-weight: medium">As a hint for translation to
+		either VHDL or Verilog (otherwise there is no way to tell if a
+		signal is an input or an output).</P>
+		<LI><P STYLE="font-weight: medium">As a means to access values of
+		variables/signals which are not visible at the top level of the
+		design.</P>
+	</UL>
+</UL>
+<H3><A NAME="17"></A><B>Behavioral elements</B></H3>
+<H4><A NAME="18"></A><B>define_behavior</B></H4>
+<P STYLE="font-weight: medium">define_behavior takes a block of code
+(surrounded by '{}') in which all behavioral code for the design is
+placed. (NOTE: a completely structural design doesn't need to have a
+define_behavior declaration).</P>
+<P STYLE="font-weight: medium">It is essential that the '{' be on the
+same line as '<B>define_behavior</B>'.  The reason for this is that
+<B>define_behavior</B> is a method and the block of code surrounded
+by '{}' is an argument to the <B>define_behavior</B> method, which
+means the following would be illegal:</P>
+<PRE>    <B>define_behavior</B>
+    <B>{</B>
+       <B>#this will result in an error!</B>
+    <B>}</B></PRE><H4>
+<A NAME="19"></A><B>process</B></H4>
+<P STYLE="font-weight: medium">Very similar to the 'process'
+statement in VHDL or the 'always' statement in Verilog. The process
+statement can take a list of sensitive signals. The block following
+the process declaration is executed when any of the signals in the
+sensitivity list changes. Example:</P>
+<PRE>    <B>process(clk){</B>
+       <B>puts &quot;clk changed: clk&quot;</B>
+    <B>}</B> </PRE><P STYLE="font-weight: medium">
+will print &quot;clk changed: 1|0&quot; whenever the clk signal
+changes. NOTE: process statements should only be used within
+define_behavior blocks. 
+</P>
+<P STYLE="font-weight: medium">Again, as with the <B>define_behavior</B>
+declaration, the '{' must appear on the same line as the '<B>process</B>'.</P>
+<H4><A NAME="20"></A><B>wait</B></H4>
+<PRE>Used to suspend a process until some condition is met. Example: 
+    <B>process() {</B>
+        <B>wait { $simTime == 1000 }</B>
+        <B>#other stuff</B>
+    <B>}</B></PRE><P STYLE="font-weight: medium">
+In this example the process will be initiated, but it will be
+suspended until $simTime is equal to 1000. NOTE: $simTime is a
+globally available variable that contains the current simulation time
+(or the number of steps that have been run so far).</P>
+<P STYLE="font-weight: medium">NOTE: You can use wait statements in a
+process with a sensitivity list, but the results may not be what you
+expect. It is probably best to use wait statements only in a process
+without a sensitivity list but this is not enforced by RHDL.</P>
+<H4>wait_for</H4>
+<P>Used to suspend a process for a time. Example:</P>
+<PRE>      
+   <B>clock=Signal(Bit(0))</B>
+   <B>define_behavior {</B>
+     <B>process() {</B>
+          <B>wait_for 4</B>
+          <B>clock &lt;&lt; clock.inv</B>
+          <B>wait_for 3</B>
+          <B>clock &lt;&lt; clock.inv</B>
+      <B>}</B>
+   <B>}</B></PRE><P>
+This example creates a repeating clock signal which starts out low
+and remains low for four time steps and then goes high and remains
+high for three time steps and repeats.</P>
+<H2>Designs</H2>
+<P>A design in RHDL is similar to an entity/architecture pair in
+VHDL. An RHDL design contains either a structural or behavioral
+design description. RHDL designs are classes in Ruby &ndash; in other
+words they define a template for defining objects. RHDL designs can
+be included in other RHDL designs thus implementing hierarchy.</P>
+<P>Here's an example of a simple RHDL design that defines a simple OR
+gate:</P>
+<PRE>  <B>require 'RHDL' </B>
+  <B>class My_Or &lt; RHDL::Design</B>
+    <B>include RHDL</B>
+    <B>def initialize(a,b,a_or_b)</B>
+      <B>super()</B>
+      <B>define_behavior {</B>
+        <B>a_or_b &lt;&lt; (a | b)</B>
+      <B>}</B>
+    <B>end</B>
+  <B>end</B></PRE><P>
+The name of this design class is <B>My_Or</B>. The the '<B>&lt;
+RHDL::Design</B>' indicates that this class inherits from a Ruby
+module called <B>RHDL::Design; </B>this module is actually where
+statements like <B>define_behavior</B>, <B>process</B> and <B>wait
+</B>are actually defined. The next line '<B>include RHDL</B>' simply
+makes those methods available to your design. The next line which
+starts '<B>def initialize</B>' is the constructor for <B>My_Or
+</B>objects. It is called whenever you instantiate a <B>My_Or </B>object
+(such as: <B>My_Or.new(aa,bb,output)</B> )<B>. </B>The constructor
+takes signal arguments - in this case: <B>a,b,a_or_b ; a </B>and <B>b</B>
+are inputs to the design, while <B>a_or_b</B> is an output. The next
+line '<B>super()</B>' is required so that RHDL designs can be
+correctly constructed; you can think of this as some wizardry that is
+peeking out from behind the curtain (it's a Ruby requirement that
+couldn't quite be hidden from view, just remember that you always
+need to make a call to <B>super</B> in your design's constructor
+because you really want your design to be super!). After this the
+behavior of the design is described in a <B>define_behavior</B>
+block; in this case <B>a </B>is Or'ed with <B>b</B>.</P>
+<H3>Instantiating the design 
+</H3>
+<P STYLE="font-weight: medium">Now to use the My_Or class/design that
+you've defined:</P>
+<PRE>  <B>include RHDL</B>
+  <B>aa = Signal(Bit('0'))</B>
+  <B>bb = Signal(Bit('0'))</B>
+  <B>output = Signal(Bit()) #initialized to 'X'</B>
+  <B>myOr = My_Or.new(aa,bb,output)</B></PRE><P>
+The <B>include RHDL</B> tells Ruby to allow calls to functions
+(methods) defined in the RHDL module to be called in the current
+scope. We then set up two input signals (<B>aa </B>and <B>bb</B>) and
+an output signal ( <B>output</B>), instantiate a <B>My_Or</B> object
+and pass in the signals.</P>
+<H3>Simulating the design 
+</H3>
+<P>Simulation in RHDL is done by including the <B>Simulator</B>
+module and calling the step method which is defined in that module
+(NOTE: this is subject to change, I'll probably be changing the name
+of this to the Simulator module). Here's how the design is simulated:</P>
+<PRE>  <B>include Simulator</B>
+  
+  <B>step { puts &quot;aa=#{aa}, bb=#{bb}, output=#{output}&quot;</B>}
+  <B>aa &lt;&lt; '1'</B>
+  <B>step</B>
+  <B>bb &lt;&lt; '1'</B>
+  <B>step</B>
+  <B>aa &lt;&lt; '0'</B>
+  <B>step</B></PRE><P>
+The output from running this is:</P>
+<PRE>  step #0: <B>aa=0, bb=0, output=X</B>
+  step #1: <B>aa=0, bb=0, output=0</B>
+  step #2: <B>aa=1, bb=0, output=1</B>
+  step #3: <B>aa=1, bb=1, output=1</B>
+  step #4: <B>aa=0, bb=1, output=1</B>
+</PRE><P>
+The <B>step</B> method in the Simulator module is used to step the
+simulation to the next time interval.  Notice that <B>step  </B><SPAN STYLE="font-weight: medium">can
+take an optional block of code which is executed at each time step. 
+You do not need to specify this block of code for each <B>step</B> as
+it will be 'remembered' until a new block is given.  In this example
+the first step takes a block which prints out the values of <B>aa</B>,
+<B>bb</B> and <B>output</B>.  The step method takes care of printing
+the '<I>step #x</I>:' in front of each line of output (NOTE: the line
+which starts with '<I>step #0</I>:' is the output at $simTime==0
+prior to any simulation steps, it represents the initial values of
+the signals specified.)</SPAN></P>
+<H3>A note about design reuse</H3>
+<P>By now you've noticed that there is no type specification on the
+signals passed into/out of the My_Or design. This is primarily
+because Ruby is what is known as a <B>dynamically typed </B>language
+as opposed to a <B>statically typed </B>language like C or Java (or
+VHDL or Verilog) where the types of all variables must be declared
+prior to their use in the program. The main advantage in this case is
+that you can reuse your <B>My_Or</B> design with different types of
+signals, for example, if you want to OR four-bit BitVectors:</P>
+<PRE>  <B>include RHDL</B>
+  <B>aa = Signal(BitVector('0000',4))</B>
+  <B>bb = Signal(Bit('0000',4))</B>
+  <B>output = Signal(BitVector('XXXX',4)) </B>
+  <B>myOr = My_Or.new(aa,bb,output)</B></PRE><P>
+As long as the underlying types of the signals being passed in
+support an OR operator ( | ) it just works. No need to rewrite your
+My_Or design to accommodate different types. This greatly improves
+the chances that you'll be able to reuse your design code.</P>
+<P><B>...More to come... for now do check out the examples. </B>
+</P>
+<HR SIZE=3 NOSHADE>
+<P><B><STRONG><A HREF="SiteMap.html">Site map</A></STRONG> || <A HREF="index.html">RHDL</A>
+/ RHDL</B></P>
+</BODY>
+</HTML>

@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>~/development/RHDL/examples/latch.rb.html</title>
+<meta name="Generator" content="Vim/6.1">
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<pre>
+<font color="#a020f0">require</font> <font color="#6858c8">'</font><font color="#f800f8">RHDL</font><font color="#6858c8">'</font>
+<font color="#a020f0">class </font><font color="#288850"><b>Latch </b></font>&lt; <font color="#6858c8">RHDL</font>::<font color="#6858c8">Design</font>
+<font color="#a020f0">  include</font> <font color="#6858c8">RHDL</font>
+<font color="#a020f0">  def </font><font color="#008888">initialize</font>(g,rst,d,q)
+    super()
+    define_behavior {
+      process(g,rst,d){
+<font color="#a02828"><b>        if</b></font> rst== <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
+          q &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>
+        <font color="#a02828"><b>elsif</b></font> g == <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
+          q &lt;&lt; d
+        <font color="#a02828"><b>end</b></font>
+      }
+    }
+  <font color="#a020f0">end</font>
+<font color="#a020f0">end</font>
+
+<font color="#a02828"><b>if</b></font> <font color="#6858c8">$0</font> == __FILE__
+<font color="#a020f0">  include</font> <font color="#6858c8">RHDL</font>
+<font color="#a020f0">  include</font> <font color="#6858c8">Simulator</font>
+  gate = <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>(<font color="#f800f8">0</font>))
+  reset= <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>(<font color="#f800f8">0</font>))
+  data = <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>(<font color="#f800f8">0</font>))
+  q    = <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>())
+  latch= <font color="#6858c8">Latch</font>.new(gate,reset,data,q)
+
+  step {puts <font color="#6858c8">&quot;</font><font color="#f800f8">gate=</font><font color="#6858c8">#{gate}</font><font color="#f800f8">,reset=</font><font color="#6858c8">#{reset}</font><font color="#f800f8">,data=</font><font color="#6858c8">#{data}</font><font color="#f800f8">,q=</font><font color="#6858c8">#{q}</font><font color="#6858c8">&quot;</font>}
+  data &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
+  step
+  gate &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
+  step
+  data &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>
+  step
+  data &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
+  step
+  gate &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>
+  step
+  step
+  reset &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
+  step
+  reset &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>
+  step
+<font color="#a02828"><b>end</b></font>
+</pre>
+</body>
+</html>

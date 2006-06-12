@@ -1,0 +1,51 @@
+                             NOTE: see UsersGuide.html for most complete info.
+                             **<c><b>RHDL USER's GUIDE</b></c>
+
+**Introduction:
+
+RHDL (Ruby Hardware Description Language) is an HDL based on the Ruby 
+programming language.  My idea in developing RHDL was to build an HDL
+on an object oriented programming language to allow HDL features (
+concurrent processes, signals, parallelism etc.) in addition to features
+which come with a modern, object oriented, agile programming language like
+Ruby (http://www.ruby-lang.org).  The intent is to allow more than just 
+simulation, but also verification and testbench creation features.  
+Ultimately, I would like to be able to translate RHDL to VHDL and/or Verilog.
+The fact that RHDL is based on Ruby allows modeling at a higher level of
+abstraction than is possible with VHDL or Verilog.
+
+RHDL users don't need to know much Ruby - this is intentional, I didn't want
+potential users to have to know Ruby in order to benefit from RHDL.  However,
+RHDL becomes a more powerful tool if the user takes a little time to learn
+some Ruby (an excellent tutorial and reference book on Ruby is: "Programming
+Ruby: The Pragmatic Programmer's Guide" by Thomas and Hunt.)
+
+RHDL is not stricly speaking a new language.  It is a set of modules (code
+libraries) that allow Ruby to look like an HDL.  Ruby has a concept called
+code blocks; these blocks are made into lexically scoped closures in order
+to define a domain specific language like RHDL without having to write a 
+seperate parser.
+
+**RHDL syntax
+  * <b>Comments</>
+    + Comments start with a '#'.  The rest of the line following is a comment.
+  * <b>string literals</b>
+    + delimited by ''
+    + exampe <b>'100101'</b>
+**RHDL elements
+  * <b>Bit</b>
+    +A Bit type can take on the following values: <b>1,0,X,Z<b>
+    +creating a Bit object: <b>b = Bit('0')</b> or <b>b=Bit(0)</b>
+    +NOTE: the Bit constructor can take either a string literal or an integer value of 1 or 0.
+  * BitVector
+    A BitVector is essentially an array of values of type Bit.
+    +creating a BitVector object: <b>bv = BitVector('1001')</b> or <b>bv = BitVector(9)</b> (the two are equivilent).
+  * Signals
+    Signals in RHDL are very similar to signals in VHDL.  Signals contain
+    values of various type, for example to create a Signal with a Bit type:
+      s = Signal(Bit('0'))
+
+  * process'es
+
+  * Ports
+
