@@ -1,3 +1,5 @@
+##deprecated: this is old style RHDL
+#
 #######################################################
 # wait_counter.rb - tests the wait style counter
 #######################################################

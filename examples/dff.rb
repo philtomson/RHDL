@@ -1,3 +1,4 @@
+#deprecated: this is old style RHDL
 require 'RHDL'
 class DFF < RHDL::Design
   include RHDL

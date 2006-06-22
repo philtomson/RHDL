@@ -1,3 +1,5 @@
+#deprecated: this is old style RHDL
+#
 require 'RHDL'
 class My_Design < RHDL::Design
   include RHDL #mixin RHDL methods

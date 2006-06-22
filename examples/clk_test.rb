@@ -1,3 +1,5 @@
+#deprecated: this is old style RHDL
+#
 $: << '../lib'
 require 'RHDL'
 
