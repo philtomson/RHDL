@@ -1,8 +1,8 @@
 #########################################################
 # RHDL - Ruby Hardware Description Language
 # 2/23/2002 Phil Tomson
-# Copyright (C) 2002,2003 Phil Tomson
-# Released under the GNU General Public License (GPL)
+# Copyright (C) 2002-2006 Phil Tomson
+# Released under same license as Ruby
 # #######################################################
 # 
 #require 'hardware/RHDL/Bit'

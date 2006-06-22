@@ -12,7 +12,7 @@ module RHDL
       end
     end
 
-    def process_behavior &block
+    def behavior &block
       @block = block
       @behavior_defined = true
     end
@@ -53,7 +53,7 @@ class TestProcess < Test::Unit::TestCase
     #for some reason:
     assert_raise(RuntimeError,
     p=RHDL::Process.new {
-      process_behavior {
+      behavior {
         "x is: #{x}"
       }
     }.call )
@@ -67,7 +67,7 @@ class TestProcess < Test::Unit::TestCase
     assert_nothing_raised() { 
        p=RHDL::Process.new { 
          x = "foo"
-         process_behavior {
+         behavior {
            "x is: #{x}"
          }
       }

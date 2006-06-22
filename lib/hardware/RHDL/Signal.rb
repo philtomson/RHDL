@@ -88,6 +88,14 @@ class Signal
   def type
     @valObj.class
   end
+
+  def rising_edge
+    event && value == '1'
+  end
+
+  def falling_edge
+    event && value == '0'
+  end
   
   #signals have history
   def initialize(valObj,width = 1)
