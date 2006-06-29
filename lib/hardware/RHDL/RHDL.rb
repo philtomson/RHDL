@@ -135,7 +135,7 @@ class Design
       #undefine method_missing here
       puts "define_behavior called!!!!"
       @__behavior = b 
-
+=begin #this doesn't seem to be used any longer:
       #create initialize here:
       initialize_str=  "def initialize #{(inports + inoutports + outports).join(',')}\n" +\
         inports.map{|i| "@#{i}"}.join(',') + " = " + inports.join(',') + "\n" +\
@@ -153,7 +153,7 @@ class Design
       puts initialize_str
       #NOTE: shouldn't need the following line anymore:
       #class_eval  initialize_str
-
+=end
     end
     def set_behavior &b
       @__behavior = b
@@ -521,6 +521,65 @@ def model &b
 
   return klass
 end
+
+def model &b
+  klass = Class.new(RHDL::Design, &b)
+
+  if klass.behavior
+    puts "has behavior"
+  end
+  if klass.get_init
+    puts "has init"
+  end
+  #check for errors:
+  #model doesn't have init or behavior block:
+  if !( klass.behavior || klass.get_init)
+    puts "neither behavior or init"
+    raise "Circuit has neither behavior block nor init block!"
+  end
+
+  #TODO:check for duplicates in inputs, outputs lists:
+
+
+  klass.class_eval {
+    define_method(:initialize) {|arg_hsh|
+      #TODO: error checking
+      #first set the default generics:
+      klass.generics_hsh.each {|k,v|
+        if arg_hsh.has_key? k
+          instance_variable_set("@#{k}".intern, arg_hsh[k])
+        else 
+  	  #default value
+          instance_variable_set("@#{k}".intern, v)
+        end
+      }
+      (klass.inports+klass.inoutports+klass.outports).each {|arg|
+        if arg_hsh.has_key? arg
+  	  instance_variable_set("@#{arg}".intern, arg_hsh[arg])
+        else
+  	  raise "No '#{arg} argument for #{self}"
+        end
+      }
+      puts "in initialize for #{klass} (from model)"
+      if klass.get_init
+        init_proc = self.class.get_init
+        self.class.send(:define_method, :__do_init, &init_proc)
+        m = self.method :__do_init
+        set_init &m
+        __do_init
+      elsif klass.behavior
+        behavior_proc = self.class.behavior
+        puts "behavior_proc.class is: #{behavior_proc.class}"
+        self.class.send(:define_method, :__do_behavior, &(self.class.behavior))
+        meth = self.method :__do_behavior
+        set_behavior &meth
+      end
+      inst_init
+    } #end of initialize method def
+  }
+  return klass
+end
+
 
 end #RHDL module
 #require 'hardware/ClkGen'

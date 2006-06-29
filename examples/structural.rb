@@ -62,8 +62,8 @@ NandGate = model {
     #a_and_b = Signal(Bit.new) #not generic
     a_and_b = Signal(sig_type.new) #more generic
 
-    andg = AndGate.new(aa,bb,a_and_b,22)
-    Invert.new(a_and_b, a_nand_b)
+    andg = AndGate.new(:a=>aa,:b=>bb,:out=>a_and_b,:my_generic=>22)
+    Invert.new(:a=>a_and_b, :not_a=>a_nand_b)
   }
 }
 
@@ -73,9 +73,14 @@ include Simulator
 a = Signal(Bit.new('1'))
 b = Signal(Bit.new('1'))
 out = Signal(Bit.new )
-nand = NandGate.new(a,b, out)
+arg_hsh = {:aa =>a,:bb =>b,:a_nand_b =>out }
+nand = NandGate.new(arg_hsh )
 step { puts "a=#{a}, b=#{b}, out=#{out}"}
 a <= '0'
-step { puts "a=#{a}, b=#{b}, out=#{out}"}
+step 
+b <= '0'
+step 
+a <= '1'
+step 
 
 

@@ -205,26 +205,13 @@ class Signal
       @event = false
     end
     if @next_value
-      #########################################################
-      #Was:
-      #case @valObj
-      ##Immediate values:
-      #when Fixnum,Bignum,Numeric, String, TrueClass, FalseClass
-      #	@valObj = @next_value
-      #else
-      #  @valObj.assign(@next_value) 
-      #end
-      #Now:
       if @valObj.respond_to?(:assign)
         @valObj.assign(@next_value)
       else
         @valObj = @next_value
       end
-      #########################################################
-
     end
     puts "update value is now: #@valObj" if $DEBUG
-    #was even earlier:@valObj <= @driver.call
   end
 
   def ==(other)

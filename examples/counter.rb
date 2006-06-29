@@ -36,13 +36,13 @@ Counter = model {
   }
 }
 
-#include Simulator
+#Simulate design
 require 'Simulator'
 include Simulator
 clk = Signal(Bit.new('0'))
 rst = Signal(Bit.new('1'))
 cout= Signal(0)
-fsm = Counter.new(clk,rst,cout,4)
+counter = Counter.new(:clk=>clk,:reset => rst,:count => cout,:mod => 4)
 
 step { puts "clk=#{clk}, rst=#{rst}, cout=#{cout}"}
 clk <= '0'; rst <= '0'
