@@ -108,16 +108,14 @@ module BitOps
     self.inv
   end
 
-  ####################################################
-  # <<  - assignment
-  ####################################################
-  def <<(bit)
-    assign(bit)
-  end
+  # Let assign be the assignment op!
+  #def <<(bit)
+  #  assign(bit)
+  #end
 
-  def <=(bit)
-    assign(bit)
-  end
+  #def <=(bit)
+  #  assign(bit)
+  #end
 
   def assign(bit)
     if bit.class == Signal
@@ -130,7 +128,6 @@ module BitOps
       @value = bit.value
     when Fixnum
       if bit > 1 || bit < 0
-        puts "bit is: #{bit}"
         raise ArgumentError, "argument must be either 0 or 1"
       else
         @value = bit.to_s
@@ -266,9 +263,9 @@ class BitVector
 
   #math ops on BitVectors (+-*/)
   def math_ops(op,other)
+    #puts "math_ops(#{op}, #{other.class})"
     case other
     when Fixnum
-      puts "op is: #{op}, @len is: #{@len}"
       BitVector.new(self.to_i.send(op,other),@len)
     when BitVector,Bit
       BitVector.new(self.to_i.send(op,other.to_i),@len)
@@ -333,13 +330,16 @@ class BitVector
 
   def <=>(other)
     #TODO: check for self containing 'X'
+    #if so return false
     case other
     when Fixnum
       self.to_i <=> other
     when BitVector
+      #TODO: check for other containing 'X','x','Z' or 'z'
       self.to_i <=> other.to_i
     when String
-      self.to_i <=> other.bin
+      #TODO: check for other containing 'X','x','Z' or 'z'
+      self.to_i <=> other.bin 
     else
       raise TypeError, "#{other.class} not comparable to BitVector"
     end
@@ -469,9 +469,9 @@ class BitVector
     end
   end
 
-  def <<(bv)
-    assign(bv)
-  end
+  #def <=(bv)
+  #  assign(bv)
+  #end
 
   def inspect
     self.to_s
@@ -518,18 +518,40 @@ if $0 == __FILE__
       bus.assign(bv)
       puts "bus after assign: #{bus}"
       assert_equal(bus.inspect, '01110001')
+      assert_equal(true, ( bvb <= bv))
     end
+
+    def test_bit_vector_overflow
+      bv = BitVector(0b1110,4)
+      assert_equal('1110', bv.to_s)
+      assert_equal('1111', (bv + 1).to_s)
+      bv.assign bv + 1
+      assert_equal('1111', bv.to_s)
+      bv.assign bv + 1
+      assert_equal('0000', bv.to_s)
+    end
+
+    def test_bv_comparisons
+      bv1 = BitVector(0b1010,4)
+      bv2 = BitVector('11111')
+      assert(bv1 < bv2)
+      assert(bv2 > bv1)
+      assert(bv1 == '1010')
+      assert(bv1 == 10 )
+      assert(bv2 == 0b11111 )
+    end 
+
 
     def test_bit
       b = Signal(Bit('0'))
       c = Signal(Bit('0'))
-      b.assign{c.inv}
+      b.assign c.inv 
       puts "b is #{b} after b.assign(c)"
 
       e = (Bit('1'))
       f = (Bit('1'))
       d = (Bit())
-      d <= e | f
+      d.assign e | f
       puts "e is: #{e}"
       puts "f is: #{f}"
       puts "d is: #{d}"

@@ -1,45 +1,67 @@
-#deprecated: this is old style RHDL
-#
-require 'RHDL'
-class Latch < RHDL::Design
-  include RHDL
-  def initialize(g,rst,d,q)
-    super()
-    define_behavior {
-      process(g,rst,d){
-        if rst== '1'
-          q << '0'
+begin
+  require 'hardware/RHDL'
+rescue LoadError
+  #if RHDL hasn't been installed yet:
+  require '../lib/hardware/RHDL'
+end
+
+include RHDL
+Latch = model {
+  inputs  g,rst,d
+  outputs q
+  define_behavior {
+    process(g,rst,d){
+      behavior {
+        if rst == '1'
+          q <= '0'
         elsif g == '1'
-          q << d
+          q <= d
         end
       }
     }
-  end
-end
+  }
+}
 
 if $0 == __FILE__
-  include RHDL
-  include Simulator
-  gate = Signal(Bit(0))
-  reset= Signal(Bit(0))
-  data = Signal(Bit(0))
-  q    = Signal(Bit())
-  latch= Latch.new(gate,reset,data,q)
+  require 'test/unit'
+  require 'Simulator'
+  class TestLatch < Test::Unit::TestCase
+    include RHDL
+    include Simulator
+    def setup
+      @gate = Signal(Bit(0))
+      @reset= Signal(Bit(0))
+      @data = Signal(Bit(0))
+      @q    = Signal(Bit())
+      @latch= Latch.new(:g => @gate,:rst => @reset,:d => @data,:q =>@q)
+    end
 
-  step {puts "gate=#{gate},reset=#{reset},data=#{data},q=#{q}"}
-  data << '1'
-  step
-  gate << '1'
-  step
-  data << '0'
-  step
-  data << '1'
-  step
-  gate << '0'
-  step
-  step
-  reset << '1'
-  step
-  reset << '0'
-  step
+    def test_latch
+      assert_equal("000X", "#@gate#@reset#@data#@q")
+      step {puts "gate=#{@gate},reset=#{@reset},data=#{@data},q=#{@q}"}
+      @data <= '1'
+      step
+      assert_equal("001X", "#@gate#@reset#@data#@q")
+      @gate <= '1'
+      step
+      assert_equal("1011", "#@gate#@reset#@data#@q")
+      @data <= '0'
+      step
+      assert_equal("1000", "#@gate#@reset#@data#@q")
+      @data <= '1'
+      step
+      assert_equal("1011", "#@gate#@reset#@data#@q")
+      @gate <= '0'
+      step
+      assert_equal("0011", "#@gate#@reset#@data#@q")
+      step
+      assert_equal("0011", "#@gate#@reset#@data#@q")
+      @reset <= '1'
+      step
+      assert_equal("0110", "#@gate#@reset#@data#@q")
+      @reset <= '0'
+      step
+      assert_equal("0010", "#@gate#@reset#@data#@q")
+    end
+  end
 end

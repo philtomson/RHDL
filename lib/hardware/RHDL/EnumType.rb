@@ -27,6 +27,9 @@ class EnumType
   end
 
   def ==(value) #other is a symbol
+    if value.class == String
+      value = value.intern
+    end
     raise TypeError, "Not a valid value: #{value}" unless @values.include? value
     @value == value
   end
@@ -39,6 +42,8 @@ class EnumType
   def assign(value)
     if value.class == Signal
       value = value.inspect
+    elsif value.class == String
+      value = value.intern
     end
     raise  TypeError, "Not a valid value for this enumeration: #{value}" unless @values.include? value
     #puts "EnumType::assign(#{value}) value.class is: #{value.class}"
@@ -68,22 +73,19 @@ if $0 == __FILE__
 
   class EnumTest < Test::Unit::TestCase
     include RHDL
-    def set_up
+    def setup
       @statesType = EnumType.new(:start,:wash,:rinse,:spin,:stop)
+      puts "@statesType is: #{@statesType.class}"
     end
 
     def test_initial
-      assert_equal(@statesType.value,:start, "the initial value should be :start")
+      assert_equal(@statesType.value, :start, "the initial value should be :start")
     end
 
     def test_negative
-      begin
+      assert_raise(TypeError) {
         @statesType << :foogle
-      rescue TypeError
-        puts $!
-      else
-        assert_equal(TypeError, "Other", "Should have thrown a TypeError exception")
-      end
+      }
     end
 
     def test_positive

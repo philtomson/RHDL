@@ -10,6 +10,8 @@
 require 'Bit'
 require 'Signal'
 require 'process'
+require 'EnumType'
+#require 'ClkGen'
 
 #NOTE: the following is done so that the rescue will catch
 #TypeError when a String is 'multiplied' by a Symbol as in
@@ -129,11 +131,9 @@ class Design
     end
 
     def define_behavior(&b)
-      puts "define_behavior called"
       #first check for wayward 'missing_methods':
       check_missing_methods
-      #undefine method_missing here
-      puts "define_behavior called!!!!"
+      #undefine method_missing here?
       @__behavior = b 
 =begin #this doesn't seem to be used any longer:
       #create initialize here:
@@ -176,30 +176,43 @@ class Design
     def outports
       @__outports ||=[]
     end
-    def create_accessor str,init_val=nil
-      class_eval    "def #{str}=(val); puts \"#{str}=\"+val.to_s+\";\";@#{str} = val; end"
-      #TODO: what about using define_method here instead of class_eval?
+    def create_accessor attrib,init_val=nil
+      #was:class_eval    "def #{attrib}=(val); puts \"#{attrib}=\"+val.to_s+\";\";@#{attrib} = val; end"
+      #now using define_method:
+      class_eval {
+	define_method("#{attrib}=".intern){|val|
+	  instance_variable_set("@#{attrib}",val)
+        }
+      }
 
       #don't need this method anymore:
-      #instance_eval "def #{str}=(val); puts \"#{str}=\"+val.to_s+\";\";@#{str} = val; end"
+      #instance_eval "def #{attrib}=(val); puts \"#{attrib}=\"+val.to_s+\";\";@#{attrib} = val; end"
       unless init_val 
         init_val = 0
       end
       if init_val.class == String
         init_val = "\"#{init_val}\""
       end
-      class_eval    "def #{str}; puts @#{str}.class.to_s+\" #{str}, #{init_val} \"; @#{str} ||=#{init_val}; end"
+      #was:class_eval    "def #{attrib}; puts @#{attrib}.class.to_s+\" #{attrib}, #{init_val} \"; @#{attrib} ||=#{init_val}; end"
+      #now using define_method:
+      class_eval { #attribute reader
+	define_method(attrib){
+	  instance_variable_get("@#{attrib}") || init_val
+        }
+      }
+
       #TODO: what about using define_method here instead of class_eval?
-      #instance_eval "def #{str}; @#{str} ||=#{init_val}; end"
+      #instance_eval "def #{attrib}; @#{attrib} ||=#{init_val}; end"
 
       #the following is here so that when the 'init' block is 
       #TODO: this following is a bit messy, needs work: (I think we can eliminate)
       if init_val != nil && init_val > 0
-        #instance_eval "def #{str}; \"#{init_val}\"; end"
+        #instance_eval "def #{attrib}; \"#{init_val}\"; end"
       else
-        #instance_eval "def #{str}; puts \"instance symbol #{str}\"; :#{str} ; end"
+        #instance_eval "def #{attrib}; puts \"instance symbol #{attrib}\"; :#{attrib} ; end"
       end
     end
+
     def inputs *in_syms
       puts "In inputs"
       in_syms.each {|input|
@@ -257,7 +270,7 @@ class Design
     def method_missing meth_id
       #missing_methods ||=[]
       missing_methods << [meth_id, caller]
-      puts "missing_methods now has: #{missing_methods.join(',')}"
+      puts "missing_methods now has: #{missing_methods.join(',')}" if $DEBUG
       meth_id
     end
 
@@ -492,55 +505,6 @@ def model &b
   #TODO:check for duplicates in inputs, outputs lists:
 
 
-  generics_list = klass.generics_hsh.map{|k,v| "#{k}=#{v}" }
-  initialize_str=  "def initialize #{(klass.inports + klass.inoutports + klass.outports + generics_list).join(',') }\n" +\
-    klass.inports.map{|i| "@#{i}"}.join(',') + " = " + klass.inports.join(',') + "\n" +\
-    klass.outports.map{|i| "@#{i}"}.join(',') + " = " + klass.outports.join(',') + "\n" #+\
-    unless klass.generics_hsh.empty?
-      initialize_str << klass.generics_hsh.map{|k,v| "@#{k}"}.join(',')+ "=" + klass.generics_hsh.keys.join(',') + "\n" #+ \
-    end
-    initialize_str <<  "\nputs \"in #{klass} initialize... (from Circuit)\""
-      
-      if klass.get_init #&& ! klass.behavior
-        initialize_str << "\n   init_proc = self.class.get_init
-          self.class.send(:define_method, :__do_init, &init_proc)
-          m = self.method :__do_init
-          set_init &m
-          __do_init"
-          #end"
-      elsif klass.behavior
-        initialize_str << "\nbehavior_proc = self.class.behavior
-      puts \"behavior_proc.class is: \#{behavior_proc.class}\"
-      self.class.send(:define_method, :__do_behavior, &(self.class.behavior))
-      meth = self.method :__do_behavior
-      set_behavior &meth "
-    end
-    initialize_str << "\n  inst_init\nend\n"
-  puts initialize_str
-  klass.class_eval initialize_str 
-
-  return klass
-end
-
-def model &b
-  klass = Class.new(RHDL::Design, &b)
-
-  if klass.behavior
-    puts "has behavior"
-  end
-  if klass.get_init
-    puts "has init"
-  end
-  #check for errors:
-  #model doesn't have init or behavior block:
-  if !( klass.behavior || klass.get_init)
-    puts "neither behavior or init"
-    raise "Circuit has neither behavior block nor init block!"
-  end
-
-  #TODO:check for duplicates in inputs, outputs lists:
-
-
   klass.class_eval {
     define_method(:initialize) {|arg_hsh|
       #TODO: error checking
@@ -582,5 +546,3 @@ end
 
 
 end #RHDL module
-#require 'hardware/ClkGen'
-#require 'hardware/StateType'
