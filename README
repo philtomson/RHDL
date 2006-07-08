@@ -13,6 +13,14 @@ To run the counter example:
 
 > ruby counter.rb
 
+Other examples which are now up to date:
+
+./examples/structural.rb
+./examples/state_machine.rb
+./examples/dff.rb
+./examples/latch.rb
+(also see: ./lib/hardware/RHDL/clkgen.rb for the clock generator example)
+
 NOTE: docs are not currently up to date.  
 
 philtomson@gmail.com

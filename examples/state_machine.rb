@@ -58,27 +58,55 @@ WashMachine = model {
 }
 
 if $0 == __FILE__
+  require 'test/unit'
   require 'Simulator'
  
-  include RHDL
-  include Simulator
+  class TestFSM < Test::Unit::TestCase
+    include RHDL
+    include Simulator
 
-  clk = Signal(Bit.new(0))
-  rst = Signal(Bit.new(1))
-  state = Signal(State_type)
-  fsm = WashMachine.new(:clk => clk,:rst => rst, :out_state => state )
+    def setup
+      @clk = Signal(Bit.new(0))
+      @rst = Signal(Bit.new(1))
+      @state = Signal(State_type)
+      @fsm = WashMachine.new(:clk => @clk,:rst => @rst, :out_state => @state )
+    end
+    def test_fsm
+      assert_equal("01 start","#@clk#@rst #@state")
+      step { puts "clk=#{@clk}, rst=#{@rst} state=#{@state}"; @clk <= @clk.inv }
+      step #hold reset
+      assert_equal("01 start","#@clk#@rst #@state")
+      @rst <= '0'
+      step
+      assert_equal("10 wash", "#@clk#@rst #@state")
+      step
+      assert_equal("00 wash", "#@clk#@rst #@state")
+      step
+      assert_equal("10 rinse", "#@clk#@rst #@state")
+      step
+      assert_equal("00 rinse", "#@clk#@rst #@state")
+      step
+      assert_equal("10 spin", "#@clk#@rst #@state")
+      step
+      assert_equal("00 spin", "#@clk#@rst #@state")
+      step
+      assert_equal("10 stop", "#@clk#@rst #@state")
+      step
+      assert_equal("00 stop", "#@clk#@rst #@state")
+      step
+      assert_equal("10 stop", "#@clk#@rst #@state")
+      step
+      assert_equal("00 stop", "#@clk#@rst #@state")
+      @rst <= '1'
+      step
+      assert_equal("11 start", "#@clk#@rst #@state")
+      @rst <= '0'
+      step
+      assert_equal("00 start", "#@clk#@rst #@state")
+      step
+      assert_equal("10 wash", "#@clk#@rst #@state")
+      end
+    end
 
-  step { puts "clk=#{clk}, rst=#{rst} state=#{state}"; clk <= clk.inv }
-  step
-  step
-  rst <= '0'
-  18.times do |i|
-    step
-  end
-  rst <= '1'
-  4.times do |i|
-    step
-    rst <= '0'
-  end
 
 end

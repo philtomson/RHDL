@@ -1,3 +1,11 @@
+#######################################################################
+#NOTE: this is the old ClkGen for the previous RHDL version
+#this file is still here for historical reference - it should
+#be removed. 
+#
+# See clkgen.rb for a much better implementation that works with the
+# new RHDL
+#######################################################################
 require 'RHDL'
 #module RHDL
 =begin
