@@ -64,8 +64,10 @@ if $0 == __FILE__
   class TestFSM < Test::Unit::TestCase
     include RHDL
     include Simulator
+    require 'clkgen'
 
     def setup
+      #@clk = Signal(Bit.new(0))
       @clk = Signal(Bit.new(0))
       @rst = Signal(Bit.new(1))
       @state = Signal(State_type)

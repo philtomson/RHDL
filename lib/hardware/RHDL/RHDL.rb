@@ -25,7 +25,8 @@ module RHDL
 $simTime = 0 #global simulation time
 MAX_EVENTS_IN_DELTA = 100
 
-
+class RHDL_SyntaxError < Exception
+end
 
 
 ############################################################
@@ -122,10 +123,17 @@ class Design
           missing_methods.delete_if {|mm| mm[0]==methid }
         }
         unless missing_methods.empty?
-          missing_methods.each {|mm|
-            puts "unknown identifier: #{mm[0]} at: #{mm[1]}"          
+	  lines = []
+          missing_methods.reverse.each {|mm|
+	    unless lines.include? mm[1]
+              puts "unknown identifier: #{mm[0]} at: #{mm[1]}"          
+	      puts
+	      lines << mm[1]
+	    else 
+	      next
+	    end
           }
-          raise SyntaxError
+          raise RHDL_SyntaxError
         end
       end
     end
@@ -133,8 +141,9 @@ class Design
     def define_behavior(&b)
       #first check for wayward 'missing_methods':
       check_missing_methods
-      #undefine method_missing here?
       @__behavior = b 
+      #NOTE: undefine method_missing here? (seems to be advantageous)
+      (class << self; self; end).send(:undef_method, :method_missing)
 =begin #this doesn't seem to be used any longer:
       #create initialize here:
       initialize_str=  "def initialize #{(inports + inoutports + outports).join(',')}\n" +\
@@ -201,11 +210,8 @@ class Design
         }
       }
 
-      #TODO: what about using define_method here instead of class_eval?
-      #instance_eval "def #{attrib}; @#{attrib} ||=#{init_val}; end"
-
-      #the following is here so that when the 'init' block is 
       #TODO: this following is a bit messy, needs work: (I think we can eliminate)
+      #NOTE: the following probably isn't needed:
       if init_val != nil && init_val > 0
         #instance_eval "def #{attrib}; \"#{init_val}\"; end"
       else
@@ -237,12 +243,11 @@ class Design
     end
 
     def generics gen_hsh
-      generics_hsh.merge! gen_hsh
-      #puts "gen_hsh.class is: #{gen_hsh.class}"
       unless gen_hsh.kind_of? Hash
-        raise SyntaxError, "generics should be specified like: :<generic_name> => <generic_value>, ..."
+        raise RHDL_SyntaxError, "generics should be specified like: :<generic_name> => <generic_value>, ..."
       end
       #gen_hsh is now guaranteed to be a Hash
+      generics_hsh.merge! gen_hsh
       gen_hsh.each {|k,v|
         create_accessor k,v
       }
@@ -267,8 +272,7 @@ class Design
       @missing_methods ||=[]
     end
 
-    def method_missing meth_id
-      #missing_methods ||=[]
+    def method_missing meth_id, *args
       missing_methods << [meth_id, caller]
       puts "missing_methods now has: #{missing_methods.join(',')}" if $DEBUG
       meth_id
@@ -499,7 +503,7 @@ def model &b
   #model doesn't have init or behavior block:
   if !( klass.behavior || klass.get_init)
     puts "neither behavior or init"
-    raise "Circuit has neither behavior block nor init block!"
+    raise RHDL_SyntaxError,"Circuit has neither behavior block nor init block!"
   end
 
   #TODO:check for duplicates in inputs, outputs lists:
@@ -517,13 +521,20 @@ def model &b
           instance_variable_set("@#{k}".intern, v)
         end
       }
-      (klass.inports+klass.inoutports+klass.outports).each {|arg|
+      ports = (klass.inports+klass.inoutports+klass.outports)
+      ports.each {|arg|
         if arg_hsh.has_key? arg
   	  instance_variable_set("@#{arg}".intern, arg_hsh[arg])
         else
-  	  raise "No '#{arg} argument for #{self}"
+  	  raise RHDL_SyntaxError,"No '#{arg}' argument given for #{self} (required argument missing)"
         end
       }
+      #now check for bogus (non-existent) arguments:
+      bogus_args = arg_hsh.keys - (ports + klass.generics_hsh.keys) 
+      if bogus_args.length > 0
+	raise RHDL_SyntaxError,"The following are not valid arguments for #{klass}: #{bogus_args.join(',')}"
+      end
+
       puts "in initialize for #{klass} (from model)"
       if klass.get_init
         init_proc = self.class.get_init
