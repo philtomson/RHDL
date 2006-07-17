@@ -1,65 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>~/development/RHDL/examples/dff.rb.html</title>
-<meta name="Generator" content="Vim/6.1">
+  <title>~/development/RHDL/trunk/examples/dff.rb.html</title>
+  <meta name="Generator" content="Vim/7.0">
+  <meta http-equiv="content-type"
+ content="text/html; charset=iso-8859-1">
 </head>
 <body bgcolor="#ffffff" text="#000000">
-<pre>
-<font color="#a020f0">require</font> <font color="#6858c8">'</font><font color="#f800f8">RHDL</font><font color="#6858c8">'</font>
-<font color="#a020f0">class </font><font color="#288850"><b>DFF </b></font>&lt; <font color="#6858c8">RHDL</font>::<font color="#6858c8">Design</font>
-<font color="#a020f0">  include</font> <font color="#6858c8">RHDL</font>
-<font color="#a020f0">  def </font><font color="#008888">initialize</font>(clk,rst,d,q)
-    super()
-    define_behavior {
-      process(clk) {
-<font color="#a02828"><b>        if</b></font> clk == <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font> <font color="#a02828"><b>and</b></font> clk.event
-<font color="#a02828"><b>          if</b></font> rst == <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
-            q &lt;&lt; <font color="#f800f8">0</font>
-          <font color="#a02828"><b>else</b></font>
-            q &lt;&lt; d
-          <font color="#a02828"><b>end</b></font>
-        <font color="#a02828"><b>end</b></font>
+<pre><font color="#a52a2a"><b> </b></font>
+<font color="#a020f0">require</font> <font color="#6a5acd">'</font><font
+ color="#ff00ff">hardware/RHDL</font><font color="#6a5acd">'</font>
+<font color="#a52a2a"><b><span style="font-family: monospace;"> </span></b></font><font
+ color="#008b8b"></font>
+<span style="font-family: mon;"><span style="font-weight: bold;"></span></span><font
+ color="#a52a2a"><b></b></font><font color="#a020f0">include</font> <font
+ color="#008b8b">RHDL</font>
+
+<font color="#008b8b">DFF</font> = <font color="#008b8b">RHDL</font>::model {<br>  inputs clk, rst, d<br>  outputs q<br>  define_behavior {<br>    process(clk) {<br>      behavior {<br>        <font
+ color="#a52a2a"><b>if</b></font> clk.rising_edge<br>          <font
+ color="#a52a2a"><b>if</b></font> rst == <font color="#ff00ff">1</font>
+            q &lt;= <font
+ color="#ff00ff">0</font>
+          <font color="#a52a2a"><b>else</b></font>
+            q &lt;= d
+          <font
+ color="#a52a2a"><b>end</b></font>
+        <font color="#a52a2a"><b>end</b></font>
       }
     }
+  }
+}
+
+<font color="#a52a2a"><b>if</b></font> <font color="#008b8b">$0</font> == <font
+ color="#ff00ff">__FILE__</font>
+  <font color="#0000ff">#test it:</font>
+  <font
+ color="#a020f0">require</font> <font color="#6a5acd">'</font><font
+ color="#ff00ff">test/unit</font><font color="#6a5acd">'</font>
+  <font
+ color="#a020f0">require</font> <font color="#6a5acd">'</font><font
+ color="#ff00ff">Simulator</font><font color="#6a5acd">'</font>
+  <font
+ color="#a020f0">require</font> <font color="#6a5acd">'</font><font
+ color="#ff00ff">clkgen</font><font color="#6a5acd">'</font>
+  <font
+ color="#a020f0">class </font><font color="#2e8b57"><b>TestDff</b></font> &lt; <font
+ color="#008b8b">Test</font>::<font color="#008b8b">Unit</font>::<font
+ color="#008b8b">TestCase</font>
+    <font color="#a020f0">include</font> <font
+ color="#008b8b">RHDL</font>
+    <font color="#a020f0">include</font> <font
+ color="#008b8b">Simulator</font>
+    <font color="#a020f0">def </font><font
+ color="#008b8b">setup</font>
+      <font color="#008b8b">@clk</font> = <font
+ color="#008b8b">ClkGen</font>.generator<br>      <font color="#008b8b">@rst</font> = Signal(Bit(<font
+ color="#6a5acd">'</font><font color="#ff00ff">0</font><font
+ color="#6a5acd">'</font>))<br>      <font color="#008b8b">@d</font>   = Signal(Bit(<font
+ color="#6a5acd">'</font><font color="#ff00ff">0</font><font
+ color="#6a5acd">'</font>))<br>      <font color="#008b8b">@q</font>   = Signal(Bit())<br>      <font
+ color="#008b8b">@dff</font> = <font color="#008b8b">DFF</font>.new(<font
+ color="#008b8b">:clk=</font>&gt;<font color="#008b8b">@clk</font>,<font
+ color="#008b8b">:rst=</font>&gt;<font color="#008b8b">@rst</font>,<font
+ color="#008b8b">:d=</font>&gt;<font color="#008b8b">@d</font>,<font
+ color="#008b8b">:q=</font>&gt;<font color="#008b8b">@q</font>)<br>    <font
+ color="#a020f0">end</font>
+
+    <font color="#a020f0">def </font><font
+ color="#008b8b">test_dff</font>
+      puts <font color="#6a5acd">"</font><font
+ color="#ff00ff">clk=</font><font color="#6a5acd">#{@clk}</font><font
+ color="#ff00ff">, rst=</font><font color="#6a5acd">#{@rst}</font><font
+ color="#ff00ff">, d=</font><font color="#6a5acd">#{@d}</font><font
+ color="#ff00ff">, q=</font><font color="#6a5acd">#{@q}</font><font
+ color="#6a5acd">"</font>
+      assert_equal(<font color="#6a5acd">"</font><font
+ color="#ff00ff">X00X</font><font color="#6a5acd">"</font>,<font
+ color="#6a5acd">"</font><font color="#6a5acd">#@clk#@rst#@d#@q</font><font
+ color="#6a5acd">"</font>)<br>      step { puts <font color="#6a5acd">"</font><font
+ color="#ff00ff">clk=</font><font color="#6a5acd">#{@clk}</font><font
+ color="#ff00ff">, rst=</font><font color="#6a5acd">#{@rst}</font><font
+ color="#ff00ff">, d=</font><font color="#6a5acd">#{@d}</font><font
+ color="#ff00ff">, q=</font><font color="#6a5acd">#{@q}</font><font
+ color="#ff00ff"> </font><font color="#6a5acd">"</font> }<br>      assert_equal(<font
+ color="#6a5acd">"</font><font color="#ff00ff">000X</font><font
+ color="#6a5acd">"</font>,<font color="#6a5acd">"</font><font
+ color="#6a5acd">#@clk#@rst#@d#@q</font><font color="#6a5acd">"</font>)<br>      <font
+ color="#008b8b">@d</font>   &lt;= <font color="#6a5acd">'</font><font
+ color="#ff00ff">1</font><font color="#6a5acd">'</font>
+      step
+      assert_equal(<font
+ color="#6a5acd">"</font><font color="#ff00ff">1011</font><font
+ color="#6a5acd">"</font>,<font color="#6a5acd">"</font><font
+ color="#6a5acd">#@clk#@rst#@d#@q</font><font color="#6a5acd">"</font>)<br>      step<br>      assert_equal(<font
+ color="#6a5acd">"</font><font color="#ff00ff">0011</font><font
+ color="#6a5acd">"</font>,<font color="#6a5acd">"</font><font
+ color="#6a5acd">#@clk#@rst#@d#@q</font><font color="#6a5acd">"</font>)<br>      puts <font
+ color="#6a5acd">"</font><font color="#ff00ff">Now activate RESET:</font><font
+ color="#6a5acd">"</font>
+      <font color="#008b8b">@rst</font> &lt;= <font
+ color="#6a5acd">'</font><font color="#ff00ff">1</font><font
+ color="#6a5acd">'</font>
+      step
+      assert_equal(<font
+ color="#6a5acd">"</font><font color="#ff00ff">1110</font><font
+ color="#6a5acd">"</font>,<font color="#6a5acd">"</font><font
+ color="#6a5acd">#@clk#@rst#@d#@q</font><font color="#6a5acd">"</font>)<br>      step<br>      assert_equal(<font
+ color="#6a5acd">"</font><font color="#ff00ff">0110</font><font
+ color="#6a5acd">"</font>,<font color="#6a5acd">"</font><font
+ color="#6a5acd">#@clk#@rst#@d#@q</font><font color="#6a5acd">"</font>)<br>      <font
+ color="#008b8b">@rst</font> &lt;= <font color="#6a5acd">'</font><font
+ color="#ff00ff">0</font><font color="#6a5acd">'</font>
+      puts <font
+ color="#6a5acd">"</font><font color="#ff00ff">Now de-activate RESET:</font><font
+ color="#6a5acd">"</font>
+      step
+      assert_equal(<font
+ color="#6a5acd">"</font><font color="#ff00ff">1011</font><font
+ color="#6a5acd">"</font>,<font color="#6a5acd">"</font><font
+ color="#6a5acd">#@clk#@rst#@d#@q</font><font color="#6a5acd">"</font>)<br>      step<br>      assert_equal(<font
+ color="#6a5acd">"</font><font color="#ff00ff">0011</font><font
+ color="#6a5acd">"</font>,<font color="#6a5acd">"</font><font
+ color="#6a5acd">#@clk#@rst#@d#@q</font><font color="#6a5acd">"</font>)<br>      <font
+ color="#008b8b">@d</font>   &lt;= <font color="#6a5acd">'</font><font
+ color="#ff00ff">0</font><font color="#6a5acd">'</font>
+      step
+      assert_equal(<font
+ color="#6a5acd">"</font><font color="#ff00ff">1000</font><font
+ color="#6a5acd">"</font>,<font color="#6a5acd">"</font><font
+ color="#6a5acd">#@clk#@rst#@d#@q</font><font color="#6a5acd">"</font>)<br>      step<br>      assert_equal(<font
+ color="#6a5acd">"</font><font color="#ff00ff">0000</font><font
+ color="#6a5acd">"</font>,<font color="#6a5acd">"</font><font
+ color="#6a5acd">#@clk#@rst#@d#@q</font><font color="#6a5acd">"</font>)<br>    <font
+ color="#a020f0">end</font>
   <font color="#a020f0">end</font>
-<font color="#a020f0">end</font>
-
-<font color="#a02828"><b>if</b></font> <font color="#6858c8">$0</font> == __FILE__
-<font color="#a020f0">  include</font> <font color="#6858c8">RHDL</font>
-<font color="#a020f0">  include</font> <font color="#6858c8">Simulator</font>
-  clk = <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>(<font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>))
-  rst = <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>(<font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>))
-  d   = <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>(<font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>))
-  q   = <font color="#6858c8">Signal</font>(<font color="#6858c8">Bit</font>())
-  dff = <font color="#6858c8">DFF</font>.new(clk,rst,d,q)
-
-  puts <font color="#6858c8">&quot;</font><font color="#f800f8">clk=</font><font color="#6858c8">#{clk}</font><font color="#f800f8">, rst=</font><font color="#6858c8">#{rst}</font><font color="#f800f8">, d=</font><font color="#6858c8">#{d}</font><font color="#f800f8">, q=</font><font color="#6858c8">#{q}</font><font color="#6858c8">&quot;</font>
-  step { puts <font color="#6858c8">&quot;</font><font color="#f800f8">clk=</font><font color="#6858c8">#{clk}</font><font color="#f800f8">, rst=</font><font color="#6858c8">#{rst}</font><font color="#f800f8">, d=</font><font color="#6858c8">#{d}</font><font color="#f800f8">, q=</font><font color="#6858c8">#{q}</font><font color="#6858c8">&quot;</font> }
-  d   &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
-  clk &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
-  step
-  clk &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>
-  step
-  puts <font color="#6858c8">&quot;</font><font color="#f800f8">Now activate RESET:</font><font color="#6858c8">&quot;</font>
-  rst &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
-  step
-  clk &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
-  step
-  rst &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>
-  clk &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>
-  puts <font color="#6858c8">&quot;</font><font color="#f800f8">Now de-activate RESET:</font><font color="#6858c8">&quot;</font>
-  step
-  clk &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
-  step
-  clk &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>
-  d   &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">0</font><font color="#6858c8">'</font>
-  step
-  clk &lt;&lt; <font color="#6858c8">'</font><font color="#f800f8">1</font><font color="#6858c8">'</font>
-  step
-
-
-
-<font color="#a02828"><b>end</b></font>
+<font color="#a52a2a"><b>end</b></font>
 </pre>
 </body>
 </html>
