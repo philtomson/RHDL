@@ -20,18 +20,15 @@ AndGate = model {
     define_behavior {
       puts "begin AndGate behavior"
       out <= a & b
+      #debugging messages:
       print_outputs
-      #fiddle
       puts "  foo is: #{foo}"
       puts "  bits is: #{bits}"
       puts "  my_generic is: #{my_generic}"
       puts "end AndGate behavior"
     }
-    self.class.send(:define_method, :fiddle, proc{
-      puts "fiddle #{foo}"
-    })
   }
-
+  #you can define your own methods within the model:
   def print_outputs
     process(out) { #you can include 'process' here, but is it
                    #a good idea?
@@ -55,11 +52,7 @@ NandGate = model {
   inputs  aa, bb
   outputs a_nand_b
   init {
-    #NOTE: for this to work, this 'block' must not be run
-    #until instantiation (otherwise the gates instantiated below will
-    #be connected to Symbols instead fo Signals resulting in error!
     sig_type = aa.type
-    #a_and_b = Signal(Bit.new) #not generic
     a_and_b = Signal(sig_type.new) #more generic
 
     andg = AndGate.new(:a=>aa,:b=>bb,:out=>a_and_b,:my_generic=>22)

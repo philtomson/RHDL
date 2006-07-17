@@ -17,10 +17,9 @@ Counter = model {
     define_behavior {
       puts "in behavior... clk: #{clk} clk.event is: #{clk.event}" if $DEBUG
       process(clk) {
-        c = 0 #c is now local to the process
+        c = 0 #c is local to the process
         puts "in process initialization... c is: #{c}" if $DEBUG
         behavior {
-          #puts "what is the value of: #{fizzle}" #good, we caught this
           if clk.rising_edge
             puts "rising edge of clk" if $DEBUG
             if reset == '1' || c== (mod-1)

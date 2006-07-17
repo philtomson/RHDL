@@ -9,14 +9,17 @@ include RHDL
 Latch = model {
   inputs  g,rst,d
   outputs q
-  define_behavior {
-    process(g,rst,d){
-      behavior {
-        if rst == '1'
-          q <= '0'
-        elsif g == '1'
-          q <= d
-        end
+  init {
+    reset_val = 0
+    define_behavior {
+      process(g,rst,d){
+	behavior {
+	  if rst == '1'
+	    q <= reset_val
+	  elsif g == '1'
+	    q <= d
+	  end
+	}
       }
     }
   }

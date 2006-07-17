@@ -1,5 +1,3 @@
-#deprecated: this is old style RHDL
-#
 begin
   require 'hardware/RHDL'
 rescue LoadError
@@ -7,7 +5,6 @@ rescue LoadError
   require '../lib/hardware/RHDL'
 end
 
-require 'ClkGen'
 
 include RHDL
 
@@ -18,7 +15,6 @@ WashMachine = model {
   outputs out_state
   init {
     puts "state_machine init"
-    #state_type = EnumType.new(:start,:wash,:rinse,:spin,:stop)
     state_sig = Signal(State_type)
     define_behavior {
       process(clk,rst) {
@@ -64,7 +60,6 @@ if $0 == __FILE__
   class TestFSM < Test::Unit::TestCase
     include RHDL
     include Simulator
-    require 'clkgen'
 
     def setup
       #@clk = Signal(Bit.new(0))
