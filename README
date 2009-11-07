@@ -17,11 +17,14 @@ Other examples which are now up to date:
 
 ./examples/structural.rb
 ./examples/state_machine.rb
-./examples/dff.rb
+./examples/dff.rb (NOTE: you need to install ParseTree to run this one
+                     sudo gem install ParseTree )
 ./examples/latch.rb
 (also see: ./lib/hardware/RHDL/clkgen.rb for the clock generator example)
 
-NOTE: docs are not currently up to date.  
+NOTE: docs are not currently completely up to date.  
+
+(now moved to git 11-7-2009)
 
 philtomson@gmail.com
 
