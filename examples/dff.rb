@@ -26,6 +26,15 @@ DFF = RHDL::model {
   }
 }
 
+require 'rubygems'
+require 'sexp_processor'
+require 'parse_tree'
+require 'pp'
+
+s_exp_array = ParseTree.new.parse_tree_for_method(DFF,:__do_behavior)
+p s_exp_array
+puts
+
 if $0 == __FILE__
   #test it:
   require 'test/unit'
@@ -40,6 +49,10 @@ if $0 == __FILE__
       @d   = Signal(Bit('0'))
       @q   = Signal(Bit())
       @dff = DFF.new(:clk=>@clk,:rst=>@rst,:d=>@d,:q=>@q)
+      puts "does @dff respond to __do_behavior? #{@dff.respond_to?(:__do_behavior)}"
+      pp s_exp_array = ParseTree.new.parse_tree_for_method(DFF,:__do_init)
+      puts
+      pp s_exp_array = ParseTree.new.parse_tree_for_method(DFF,:__do_behavior)
     end
 
     def test_dff
@@ -71,4 +84,11 @@ if $0 == __FILE__
       assert_equal("0000","#@clk#@rst#@d#@q")
     end
   end  
+
+require 'rubygems'
+require 'sexp_processor'
+
+sexp_array = ParseTree.new.parse_tree(DFF)
+p sexp_array
+
 end

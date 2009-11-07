@@ -142,89 +142,71 @@ class Design
       #first check for wayward 'missing_methods':
       check_missing_methods
       @__behavior = b 
-      #NOTE: undefine method_missing here? (seems to be advantageous)
+      #Undefine method_missing here so we can catch problems in the 
+      #block passed to define_behavior 
       (class << self; self; end).send(:undef_method, :method_missing)
-=begin #this doesn't seem to be used any longer:
-      #create initialize here:
-      initialize_str=  "def initialize #{(inports + inoutports + outports).join(',')}\n" +\
-        inports.map{|i| "@#{i}"}.join(',') + " = " + inports.join(',') + "\n" +\
-        outports.map{|i| "@#{i}"}.join(',') + " = " + outports.join(',') + \
-        "\nputs \"in #{self} initialize... (created by define_behavior)\"
-        behavior_proc = self.class.behavior
-        puts \"behavior_proc.class is: \#{behavior_proc.class}\"
-        self.class.send(:define_method, :__do_behavior, &(self.class.behavior))
-        meth = self.method :__do_behavior
-        set_behavior &meth 
-        inst_init
-        puts \"end of #{self} initialize...\"
-      end "#}
-      puts "init str is: "
-      puts initialize_str
-      #NOTE: shouldn't need the following line anymore:
-      #class_eval  initialize_str
-=end
+      #TODO: should also undef method_missing in init and other def behav
     end
+
     def set_behavior &b
       @__behavior = b
     end
+
     def behavior
-      puts "calling #{self}.behavior!! @__behavior.class is: #{@__behavior.class}"
+      puts "calling #{self}.behavior!! @__behavior.class is: #{@__behavior.class}" if $DEBUG
       @__behavior
     end
+
     def run
       puts "in #{self}::run"
       puts "a is: #{a}, b is: #{b} "
       @__behavior.call
     end
+
     def inports
       @__inports ||=[]
     end
+
     def inoutports
       @__inoutports ||=[]
     end
+
     def outports
       @__outports ||=[]
     end
+
     def create_accessor attrib,init_val=nil
-      #was:class_eval    "def #{attrib}=(val); puts \"#{attrib}=\"+val.to_s+\";\";@#{attrib} = val; end"
-      #now using define_method:
+      #writer:
       class_eval {
 	define_method("#{attrib}=".intern){|val|
 	  instance_variable_set("@#{attrib}",val)
         }
       }
 
-      #don't need this method anymore:
-      #instance_eval "def #{attrib}=(val); puts \"#{attrib}=\"+val.to_s+\";\";@#{attrib} = val; end"
       unless init_val 
         init_val = 0
       end
+
       if init_val.class == String
         init_val = "\"#{init_val}\""
       end
-      #was:class_eval    "def #{attrib}; puts @#{attrib}.class.to_s+\" #{attrib}, #{init_val} \"; @#{attrib} ||=#{init_val}; end"
-      #now using define_method:
+
+      #reader:
       class_eval { #attribute reader
 	define_method(attrib){
 	  instance_variable_get("@#{attrib}") || init_val
         }
       }
-
-      #TODO: this following is a bit messy, needs work: (I think we can eliminate)
-      #NOTE: the following probably isn't needed:
-      if init_val != nil && init_val > 0
-        #instance_eval "def #{attrib}; \"#{init_val}\"; end"
-      else
-        #instance_eval "def #{attrib}; puts \"instance symbol #{attrib}\"; :#{attrib} ; end"
-      end
     end
 
     def inputs *in_syms
-      puts "In inputs"
       in_syms.each {|input|
         if input.class == Hash
+	  #TODO: handle hashes as in the generics case?
+	  # this useage would look something like:
+	  #   inputs a=>0
+	  # a way to set an initial value
         end
-        #inports << Port.new(input.to_s)
         inports << input
         create_accessor input
       }
@@ -255,14 +237,13 @@ class Design
 
     def inouts *io_syms
       io_syms.each {|io|
-        #inoutports << Port.new(io.to_s)
         inoutports << io
         create_accessor io
       }
     end
+
     def outputs *out_syms
       out_syms.each {|output|
-        #outports << Port.new(output.to_s)
         outports << output
         create_accessor output
       }
@@ -272,6 +253,8 @@ class Design
       @missing_methods ||=[]
     end
 
+    #this is how we handle input/output signals so user doesn't have
+    #to specify them as symbols:
     def method_missing meth_id, *args
       missing_methods << [meth_id, caller]
       puts "missing_methods now has: #{missing_methods.join(',')}" if $DEBUG
@@ -282,7 +265,7 @@ class Design
 
   
   def inst_init #(inports=nil,outports=nil)
-    puts "inst_init called!"
+    puts "inst_init called!" if $DEBUG
     @simMgr = SimulationMgr.instance
     @simMgr.register_design(self)
     @per_step = nil
@@ -506,12 +489,12 @@ def model &b
     raise RHDL_SyntaxError,"Circuit has neither behavior block nor init block!"
   end
 
-  #TODO:check for duplicates in inputs, outputs lists:
-
+  #TODO:should probably check for duplicates in inputs, outputs lists
+  #(not needed yet)
 
   klass.class_eval {
     define_method(:initialize) {|arg_hsh|
-      #TODO: error checking
+      #TODO: more error checking
       #first set the default generics:
       klass.generics_hsh.each {|k,v|
         if arg_hsh.has_key? k
@@ -521,7 +504,7 @@ def model &b
           instance_variable_set("@#{k}".intern, v)
         end
       }
-      ports = (klass.inports+klass.inoutports+klass.outports)
+      ports = (klass.inports + klass.inoutports + klass.outports)
       ports.each {|arg|
         if arg_hsh.has_key? arg
   	  instance_variable_set("@#{arg}".intern, arg_hsh[arg])
