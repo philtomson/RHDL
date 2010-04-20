@@ -1,4 +1,11 @@
+
+if(RUBY_VERSION.split(".")[0..1].join(".") == "1.9") 
+  require 'continuation'
+end
+
+
 class T_Process
+
 
   def initialize( &callable )
     @callable = callable
@@ -6,7 +13,8 @@ class T_Process
 
   def call
     callcc do
-      | @return_from_call |
+      | ret_from_call |
+      @return_from_call = ret_from_call
       if @retry_wait
         @retry_wait.call
       else
@@ -20,7 +28,8 @@ class T_Process
   def wait( cond )
     until cond.call
       callcc do
-        | @retry_wait |
+        | retry_w |
+        @retry_wait = retry_w
         @return_from_call.call
       end
       @retry_wait  = nil
