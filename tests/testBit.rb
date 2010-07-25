@@ -4,7 +4,7 @@ require 'test/unit'
 class TestBit < Test::Unit::TestCase
   include RHDL
 
-  def set_up
+  def setup
     @b1 = Bit('0')
     @b2 = Bit(1)
   end
@@ -51,33 +51,33 @@ class TestBit < Test::Unit::TestCase
   def test_inv
     b3 = @b1.inv #using .inv
     assert_equal(b3,1,"Should be 1")
-    assert_equal(b3.type,Bit,"Should be Bit")
+    assert_equal(b3.class,Bit,"Should be Bit")
     b4 = ~@b1 #using ~
     assert_equal(b4,1,"Should be 1")
-    assert_equal(b4.type,Bit,"Should be Bit")
+    assert_equal(b4.class,Bit,"Should be Bit")
     b5 = ~(b3 ^ b4) #try ~ on an equation
     assert_equal(b5,1,"Should be 1")
-    assert_equal(b5.type,Bit,"Should be Bit")
+    assert_equal(b5.class,Bit,"Should be Bit")
   end
 
   def test_assign
-    @b1 << '1'
+    @b1.assign'1'
     assert_equal(@b1,'1',"Should be '1'")
     assert_equal(@b1,1,"Should be '1'")
-    @b1 << 0 
+    @b1.assign 0 
     assert_equal(@b1,0,"Should be 0")
     assert_equal(@b1,'0',"Should be 0")
     begin
-      @b1 << 12
+      @b1.assign 12
     rescue 
       assert_equal($!.class,ArgumentError,"Should be TypeError")
     end
     begin
-      @b1 << (0..3) #check for type error
+      @b1.assign (0..3) #check for type error
     rescue 
       assert_equal($!.class,TypeError,"Should be TypeError")
     end
-    @b1 << @b2
+    @b1.assign @b2
     assert_equal(@b1,@b2,"Should be equal")
   end
 
