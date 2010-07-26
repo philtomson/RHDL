@@ -1,7 +1,13 @@
 ###########################################################################
 # TestTb.rb - test TestBench and hierarchy and structural style
 ###########################################################################
-require 'RHDL'
+begin
+  require 'hardware/RHDL'
+rescue LoadError
+  #if RHDL hasn't been installed yet:
+  require '../lib/hardware/RHDL'
+end
+
 
 ################################################
 # not gate
@@ -102,14 +108,15 @@ end
 if $0 == __FILE__
   require 'test/unit'
   require 'RHDL'
-  #require 'TestBench'
+  require 'Simulator'
+  require 'TestBench'
 
   class TestingMyDesign < Test::Unit::TestCase 
     include RHDL
     include Simulator
     include TestBench
 
-    def set_up
+    def setup
       @iN_SIGNALS  = ['A','B','CLK']
       @oUT_SIGNALS = ['COUNTER']
     end

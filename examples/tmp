@@ -1,42 +1,926 @@
-EnumType::new
---start value is: start, @value.class is:Symbol
-In inputs
-state_machine init
-calling #<Class:0xb7c26688>.behavior!! @__behavior.class is: Proc
+dff.rb:69: warning: useless use of <= in void context
+dff.rb:75: warning: useless use of <= in void context
+dff.rb:80: warning: useless use of <= in void context
+dff.rb:86: warning: useless use of <= in void context
+Exception `LoadError' at dff.rb:2 - no such file to load -- hardware/RHDL
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:97: warning: `&' interpreted as argument prefix
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:526: warning: `&' interpreted as argument prefix
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:533: warning: `&' interpreted as argument prefix
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Bit.rb:188: warning: useless use of a variable in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Bit.rb:189: warning: useless use of a variable in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Bit.rb:190: warning: useless use of a variable in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Bit.rb:191: warning: useless use of a variable in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:309: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:315: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:335: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:342: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:347: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:352: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:357: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:362: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:377: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:380: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:384: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:394: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:400: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/Signal.rb:415: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/process.rb:9: warning: `&' interpreted as argument prefix
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:81: warning: instance variable @__init not initialized
+Exception `LoadError' at /usr/local/lib/site_ruby/1.8/rubygems.rb:1113 - no such file to load -- rubygems/defaults/operating_system
+Exception `LoadError' at /usr/local/lib/site_ruby/1.8/rubygems/config_file.rb:50 - no such file to load -- Win32API
+Exception `NoMethodError' at /usr/lib/ruby/1.8/rational.rb:78 - undefined method `gcd' for Rational(1, 2):Rational
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:26: warning: useless use of <= in void context
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:22: warning: useless use of <= in void context
+missing_methods now has: clk,dff.rb:12,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',dff.rb:11
+missing_methods now has: clk,dff.rb:12,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',dff.rb:11,rst,dff.rb:12,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',dff.rb:11
+missing_methods now has: clk,dff.rb:12,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',dff.rb:11,rst,dff.rb:12,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',dff.rb:11,d,dff.rb:12,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',dff.rb:11
+missing_methods now has: clk,dff.rb:12,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',dff.rb:11,rst,dff.rb:12,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',dff.rb:11,d,dff.rb:12,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',dff.rb:11,q,dff.rb:13,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',dff.rb:11
+calling #<Class:0xb780994c>.behavior!! @__behavior.class is: Proc
+has behavior
+calling #<Class:0xb780994c>.behavior!! @__behavior.class is: Proc
+
+missing_methods now has: startval,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48
+missing_methods now has: startval,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48,len1,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48
+missing_methods now has: startval,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48,len1,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48,len2,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48
+missing_methods now has: startval,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48,len1,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48,len2,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48,clk,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:10,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48
+missing_methods now has: startval,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48,len1,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48,len2,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:9,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48,clk,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:10,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48,startval,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:12,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:97:in `instance_eval',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:97:in `init',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:11,/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `initialize',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `new',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:477:in `model',/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/clkgen.rb:8,/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require',/usr/local/lib/site_ruby/1.8/rubygems/custom_require.rb:31:in `require',dff.rb:48
+calling #<Class:0xb767ac98>.behavior!! @__behavior.class is: Proc
 has behavior
 has init
-calling #<Class:0xb7c26688>.behavior!! @__behavior.class is: Proc
-Loaded suite state_machine
+calling #<Class:0xb767ac98>.behavior!! @__behavior.class is: Proc
+Loaded suite dff
 Started
-in initialize for WashMachine (from model)
-state_machine init
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/RHDL.rb:81: warning: instance variable @__init not initialized
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/t_process.rb:18: warning: instance variable @retry_wait not initialized
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/t_process.rb:18: warning: instance variable @retry_wait not initialized
+startval is: 0, len1 is: 1, len2 is: 1
+in initialize for ClkGen (from model)
 inst_init called!
-step#0: clk=0, rst=1 state=start
-RESET
-step#1: clk=1, rst=1 state=start
-RESET
-step#2: clk=0, rst=1 state=start
-Current state is: wash
-step#3: clk=1, rst=0 state=wash
-step#4: clk=0, rst=0 state=wash
-Current state is: rinse
-step#5: clk=1, rst=0 state=rinse
-step#6: clk=0, rst=0 state=rinse
-Current state is: spin
-step#7: clk=1, rst=0 state=spin
-step#8: clk=0, rst=0 state=spin
-Current state is: stop
-step#9: clk=1, rst=0 state=stop
-step#10: clk=0, rst=0 state=stop
-step#11: clk=1, rst=0 state=stop
-step#12: clk=0, rst=0 state=stop
-RESET
-Current state is: start
-step#13: clk=1, rst=1 state=start
-step#14: clk=0, rst=0 state=start
-Current state is: wash
-step#15: clk=1, rst=0 state=wash
-.
-Finished in 0.00762 seconds.
+in initialize for DFF (from model)
+calling DFF.behavior!! @__behavior.class is: Proc
+calling DFF.behavior!! @__behavior.class is: Proc
+behavior_proc.class is: Proc
+calling DFF.behavior!! @__behavior.class is: Proc
+inst_init called!
+does @dff respond to __do_behavior? true
 
-1 tests, 15 assertions, 0 failures, 0 errors
+clk=X, rst=0, d=0, q=X
+step#0: clk=X, rst=0, d=0, q=X 
+assign 0
+nextValInQueue: 0
+@eventQueue:
+in T_Process#wait cond is: Proc
+update: next_value = 0 current value = X
+update: next_value = 0 current value = X
+update: next_value.class = String current value.class = RHDL::Bit
+update: 0 X
+update: 0 X
+update: class:String!= RHDL::Bit
+update value is now: 0
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value =  current value = X
+update: next_value =  current value = X
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: X
+assign 0
+nextValInQueue: 0
+@eventQueue:
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value =  current value = X
+update: next_value =  current value = X
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: X
+@behavior.call ==> 2 times
+step#1: clk=0, rst=0, d=0, q=X 
+assign 1
+nextValInQueue: 1
+@eventQueue:
+1
+assign 0
+nextValInQueue: 0
+@eventQueue:
+methID is: inv, args are: 
+assign 1
+nextValInQueue: 1
+@eventQueue:
+in T_Process#wait cond is: Proc
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 0
+update: next_value = 1 current value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update: 1 0
+update: 1 0
+update value is now: 1
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 0
+update: next_value = 1 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update: 1 0
+update: 1 0
+update: class:String!= RHDL::Bit
+update value is now: 1
+update: next_value =  current value = X
+update: next_value =  current value = X
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: X
+assign 1
+nextValInQueue: 1
+@eventQueue:
+update: next_value = 1 current value = 0
+update: next_value = 1 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update: 1 0
+update: 1 0
+update: class:String!= RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+u/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/t_process.rb:18: warning: instance variable @retry_wait not initialized
+pdate: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value =  current value = X
+update: next_value =  current value = X
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: X
+assign 1
+nextValInQueue: 1
+@eventQueue:
+assign 1
+nextValInQueue: 1
+@eventQueue:
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = X
+update: next_value = 1 current value = X
+update: next_value.class = String current value.class = RHDL::Bit
+update: 1 X
+update: 1 X
+update: class:String!= RHDL::Bit
+update value is now: 1
+assign 1
+nextValInQueue: 1
+@eventQueue:
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+@behavior.call ==> 4 times
+step#2: clk=1, rst=0, d=1, q=1 
+assign 1
+nextValInQueue: 1
+@eventQueue:
+methID is: inv, args are: 
+assign 0
+nextValInQueue: 0
+@eventQueue:
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update value is now: 0
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+assign 0
+nextValInQueue: 0
+@eventQueue:
+in T_Process#wait cond is: Proc
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update: class:String!= RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 0
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: /home/phil/devel/ruby/RHDL/lib/hardware/RHDL/t_process.rb:18: warning: instance variable @retry_wait not initialized
+/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/t_process.rb:18: warning: instance variable @retry_wait not initialized
+1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+assign 0
+nextValInQueue: 0
+@eventQueue:
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 0
+update: next_value =  current value = 0
+update: next_value =  current value = 0
+update: next_value.class = NilClass current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+@behavior.call ==> 3 times
+step#3: clk=0, rst=0, d=1, q=1 
+Now activate RESET:
+assign 1
+nextValInQueue: 1
+@eventQueue:
+1
+assign 0
+nextValInQueue: 0
+@eventQueue:
+methID is: inv, args are: 
+assign 1
+nextValInQueue: 1
+@eventQueue:
+in T_Process#wait cond is: Proc
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 0
+update: next_value = 1 current value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update: 1 0
+update: 1 0
+update value is now: 1
+update: next_value = 1 current value = 0
+update: next_value = 1 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update: 1 0
+update: 1 0
+update: class:String!= RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+assign 1
+nextValInQueue: 1
+@eventQueue:
+update: next_value = 1 current value = 0
+update: next_value = 1 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update: 1 0
+update: 1 0
+update: class:String!= RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+assign 1
+nextValInQueue: 1
+@eventQueue:
+assign 0
+nextValInQueue: 0
+@eventQueue:
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.cla/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/t_process.rb:18: warning: instance variable @retry_wait not initialized
+ss = Fixnum current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update: class:Fixnum!= RHDL::Bit
+update value is now: 0
+assign 1
+nextValInQueue: 1
+@eventQueue:
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = Fixnum current value.class = RHDL::Bit
+update value is now: 0
+@behavior.call ==> 4 times
+step#4: clk=1, rst=1, d=1, q=0 
+assign 1
+nextValInQueue: 1
+@eventQueue:
+methID is: inv, args are: 
+assign 0
+nextValInQueue: 0
+@eventQueue:
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = Fixnum current value.class = RHDL::Bit
+update value is now: 0
+assign 0
+nextValInQueue: 0
+@eventQueue:
+in T_Process#wait cond is: Proc
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update: class:String!= RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = Fixnum current value.class = RHDL::Bit
+update value is now: 0
+assign 0
+nextValInQueue: 0
+@eventQueue:
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = Fixnum current value.class = RHDL::Bit
+update value is now: 0
+@behavior.call ==> 3 times
+step#5: clk=0, rst=1, d=1, q=0 
+assign 0
+nextValInQueue: 0
+@eventQueue:
+0
+Now de-activate RESET:
+assign 0
+nextValI/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/t_process.rb:18: warning: instance variable @retry_wait not initialized
+nQueue: 0
+@eventQueue:
+methID is: inv, args are: 
+assign 1
+nextValInQueue: 1
+@eventQueue:
+in T_Process#wait cond is: Proc
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 0
+update: next_value = 1 current value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update: 1 0
+update: 1 0
+update value is now: 1
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update: class:String!= RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = Fixnum current value.class = RHDL::Bit
+update value is now: 0
+assign 1
+nextValInQueue: 1
+@eventQueue:
+update: next_value = 1 current value = 0
+update: next_value = 1 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update: 1 0
+update: 1 0
+update: class:String!= RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = Fixnum current value.class = RHDL::Bit
+update value is now: 0
+assign 1
+nextValInQueue: 1
+@eventQueue:
+assign 1
+nextValInQueue: 1
+@eventQueue:
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 0
+update: next_value = 1 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update: 1 0
+update: 1 0
+update: class:String!= RHDL::Bit
+update value is now: 1
+assign 1
+nextValInQueue: 1
+@eventQueue:
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+@behavior.call ==> 4 times
+step#6: clk=1, rst=0, d=1, q=1 
+assign 1
+nextValInQueue: 1
+@eventQueue:
+methID is: inv, args are: 
+assign 0
+nextValInQueue: 0
+@eventQueue:
+update: next_value = /home/phil/devel/ruby/RHDL/lib/hardware/RHDL/t_process.rb:18: warning: instance variable @retry_wait not initialized
+1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+assign 0
+nextValInQueue: 0
+@eventQueue:
+in T_Process#wait cond is: Proc
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update: class:String!= RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+assign 0
+nextValInQueue: 0
+@eventQueue:
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+@behavior.call ==> 3 times
+step#7: clk=0, rst=0, d=1, q=1 
+assign 0
+nextValInQueue: 0
+@eventQueue:
+0
+assign 0
+nextValInQueue: 0
+@eventQueue:
+methID is: inv, args are: 
+assign 1
+nextValInQueue: 1
+@eventQueue:
+in T_Process#wait cond is: Proc
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 0
+update: next_value = 1 current value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update: 1 0
+update: 1 0
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update: class:String!= RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+assign 1
+nextValInQueue: 1
+@eventQueue:
+update: next_value = 1 current value = 0
+update: next_value = 1 current value = 0
+update: next_value.class = String current value.c/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/t_process.rb:18: warning: instance variable @retry_wait not initialized
+lass = RHDL::Bit
+update: 1 0
+update: 1 0
+update: class:String!= RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+assign 1
+nextValInQueue: 1
+@eventQueue:
+assign 0
+nextValInQueue: 0
+@eventQueue:
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update: class:String!= RHDL::Bit
+update value is now: 0
+assign 1
+nextValInQueue: 1
+@eventQueue:
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+@behavior.call ==> 4 times
+step#8: clk=1, rst=0, d=0, q=0 
+assign 1
+nextValInQueue: 1
+@eventQueue:
+methID is: inv, args are: 
+assign 0
+nextValInQueue: 0
+@eventQueue:
+update: next_value = 1 current value = 1
+update: next_value = 1 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 1
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+assign 0
+nextValInQueue: 0
+@eventQueue:
+in T_Process#wait cond is: Proc
+update: next_value = 0 current value = 1
+update: next_value = 0 current value = 1
+update: next_value.class = String current value.class = RHDL::Bit
+update: 0 1
+update: 0 1
+update: class:String!= RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current/home/phil/devel/ruby/RHDL/lib/hardware/RHDL/t_process.rb:18: warning: instance variable @retry_wait not initialized
+ value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+assign 0
+nextValInQueue: 0
+@eventQueue:
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = RHDL::Bit current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+update: next_value = 0 current value = 0
+update: next_value = 0 current value = 0
+update: next_value.class = String current value.class = RHDL::Bit
+update value is now: 0
+@behavior.call ==> 3 times
+step#9: clk=0, rst=0, d=0, q=0 
+.
+Finished in 0.030743 seconds.
+
+1 tests, 10 assertions, 0 failures, 0 errors

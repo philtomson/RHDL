@@ -27,13 +27,19 @@ DFF = RHDL::model {
 }
 
 require 'rubygems'
-require 'sexp_processor'
-require 'parse_tree'
 require 'pp'
-
-s_exp_array = ParseTree.new.parse_tree_for_method(DFF,:__do_behavior)
-p s_exp_array
+##### Experimemtal:
+#require 'sexp_processor'
+#require 'parse_tree'
+#require 'ruby_parser'
+#s_exp_array = ParseTree.new.parse_tree_for_method(DFF,:__do_behavior)
+#p s_exp_array
+###################
 puts
+
+#parser = RubyParser.new
+#parser.parse 
+
 
 if $0 == __FILE__
   #test it:
@@ -50,9 +56,9 @@ if $0 == __FILE__
       @q   = Signal(Bit())
       @dff = DFF.new(:clk=>@clk,:rst=>@rst,:d=>@d,:q=>@q)
       puts "does @dff respond to __do_behavior? #{@dff.respond_to?(:__do_behavior)}"
-      pp s_exp_array = ParseTree.new.parse_tree_for_method(DFF,:__do_init)
+      #pp s_exp_array = ParseTree.new.parse_tree_for_method(DFF,:__do_init)
       puts
-      pp s_exp_array = ParseTree.new.parse_tree_for_method(DFF,:__do_behavior)
+      #pp s_exp_array = ParseTree.new.parse_tree_for_method(DFF,:__do_behavior)
     end
 
     def test_dff
@@ -86,9 +92,8 @@ if $0 == __FILE__
   end  
 
 require 'rubygems'
-require 'sexp_processor'
-
-sexp_array = ParseTree.new.parse_tree(DFF)
-p sexp_array
+#require 'sexp_processor'
+#sexp_array = ParseTree.new.parse_tree(DFF)
+#p sexp_array
 
 end

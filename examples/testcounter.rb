@@ -1,3 +1,6 @@
+#NOTE: this is deprecated RHDL style - keeping this file here only 
+# to show the contrast (and improvmement) of the current RHDL
+# syntax over the 'original'
 require 'RHDL'
 class MyCounter < RHDL::Design
   include RHDL #mixin RHDL methods

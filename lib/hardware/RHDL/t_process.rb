@@ -26,6 +26,7 @@ class T_Process
   end
 
   def wait( cond )
+    puts "in T_Process#wait cond is: #{cond.class}" if $DEBUG
     until cond.call
       callcc do
         | retry_w |
@@ -59,7 +60,7 @@ class T_Process_test < Test::Unit::TestCase
     process = T_Process.new do
       | pr |
       out << 1
-      pr.wait { true }
+      pr.wait proc{ true }
       out << 2
     end
     assert_equal( [], out, 'before call' )
@@ -73,10 +74,11 @@ class T_Process_test < Test::Unit::TestCase
     process = T_Process.new do
       | pr |
       out << 1
-      pr.wait do
+      pr.wait proc {
+      #pr.wait  true
         out << 2
         continue_flag
-      end
+      }
       out << 3
     end
     assert_equal( [], out, 'before call' )
@@ -97,10 +99,10 @@ class T_Process_test < Test::Unit::TestCase
     process = T_Process.new do
       | pr |
       out << 1
-      pr.wait do
+      pr.wait proc {
         out << 2
         continue_flag
-      end
+      }
       out << 3
     end
     assert_equal( [], out, 'before call' )

@@ -15,11 +15,9 @@ module RHDL
         print "step##{$simTime}: "
          @_block_.call 
       end
-      if cgens
-        cgens.each {|clkgen|
-          clkgen.step if clkgen.respond_to? :step
-        }
-      end
+      cgens.each {|clkgen|
+        clkgen.step if clkgen.respond_to? :step
+      }
     end
   end
 end

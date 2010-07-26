@@ -1,10 +1,17 @@
+begin
+  require 'hardware/RHDL'
+rescue LoadError
+  #if RHDL hasn't been installed yet:
+  require '../lib/hardware/RHDL'
+end
+
 require '../examples/dff.rb'
 require 'test/unit'
 
 class TestBV < Test::Unit::TestCase
   include RHDL
 
-  def set_up
+  def setup
     @bv1 = BitVector('0000',4)
     @bv2 = BitVector(12,4)
   end
@@ -27,24 +34,24 @@ class TestBV < Test::Unit::TestCase
     assert_equal(@bv1,1,"Should be 1")
     assert_equal(@bv1+@bv2,13,"Should be 13")
     assert_equal(BitVector,(@bv1+@bv2).class,"Should be a BitVector")
-    @bv2<< (@bv2+3)
+    @bv2.assign (@bv2+3)
     assert_equal(@bv2,15,"should be 15")
-    @bv2<< (@bv2+5)
+    @bv2.assign (@bv2+5)
     assert_equal(4,@bv2.length,"length should be 4")
     assert_equal(@bv2,'0100',"should be 4")
   end
 
   def test_assign
-    @bv1 << '1010'
+    @bv1.assign '1010'
     assert_equal(@bv1,'1010',"Should be '1010'")
     assert_equal(@bv1,10,"Should be 10")
-    @bv1 << 12
+    @bv1.assign 12
     assert_equal(@bv1,12,"Should be 12")
     assert_equal(@bv1,'1100',"Should be '1100'")
-    @bv1 << [Bit(0),Bit(1),Bit(0),Bit(1)]
+    @bv1.assign [Bit(0),Bit(1),Bit(0),Bit(1)]
     assert_equal(@bv1,'0101',"")
     #try to make one that is too big:
-    @bv1 << [Bit(1),Bit(1),Bit(0),Bit(1),Bit(0),Bit(1)]
+    @bv1.assign [Bit(1),Bit(1),Bit(0),Bit(1),Bit(0),Bit(1)]
     assert_equal(@bv1,'0101',"")
   end
 
@@ -53,7 +60,7 @@ class TestBV < Test::Unit::TestCase
     assert_equal(@bv2[1],0,"Bit 1 should be 0")
     assert_equal(@bv2[2],1,"Bit 2 should be 1")
     assert_equal(@bv2[3],1,"Bit 3 should be 1")
-    @bv2[0] << Bit(1)
+    @bv2[0].assign Bit(1)
     assert_equal(@bv2[0],1)
     #TODO: do we want 'each' to work?
     #@bv1.each { |bit|
@@ -77,14 +84,14 @@ class TestBV < Test::Unit::TestCase
   def test_sub
     bv3 = (@bv2-2)
     assert_equal(bv3,'1010',"Should be 10")
-    bv3 << bv3-'1011'
+    bv3.assign bv3-'1011'
     assert_equal(bv3,'0001',"")
   end
 
   def test_inv
     bv3 = @bv2.inv
     assert_equal(bv3,'0011',"Should be '0011'")
-    bv3 << ~bv3
+    bv3.assign ~bv3
     assert_equal(bv3,'1100',"Should be '1100'")
   end
 

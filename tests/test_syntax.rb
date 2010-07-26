@@ -13,18 +13,18 @@ class TestRHDLsyntax < Test::Unit::TestCase
   include RHDL
   def test_no_init_or_behavior
     assert_raise(RHDL_SyntaxError) {
-      foo = model {
-        inputs x,y
-        outputs z
+      foo = RHDL::model {
+        inputs x1,y1
+        outputs z1
       }
     }
   end
 
   def test_bad_generic
     assert_raise(RHDL_SyntaxError) {
-      foo = model {
-        inputs x,y
-        outputs z
+      foo = RHDL::model {
+        inputs x2,y2
+        outputs z2
 	generics gen
 	init {}
       }
@@ -83,8 +83,6 @@ class TestRHDLsyntax < Test::Unit::TestCase
     }
     assert_equal("FOO", dff.some_meth )
   end
-
-
 
 end
 
