@@ -59,7 +59,6 @@ module BitOps
   end
 
   def |(bit)
-    puts "#{self} | #{bit}"
     self.or(bit)
   end
 
