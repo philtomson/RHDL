@@ -392,11 +392,23 @@ class BitVector
   end
 
   def self_op(op)
-      tmpArray = []
+    if op[-1, 1] == "!" then
+      oldval = @bitArray.join
       @bitArray.each_with_index {|bit,i|
         @bitArray[i].assign @bitArray[i].send(op)
       }
-      return self
+      if @bitArray.join == oldval then
+        return nil
+      else
+        return self
+      end
+    else
+      tmpArray = []
+      @bitArray.each_with_index {|bit,i|
+        tmpArray[i] = @bitArray[i].send(op)
+      }
+      return self.class.new tmpArray.reverse.join
+    end
   end
     
 
